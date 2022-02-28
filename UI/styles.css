@@ -1,5 +1,7 @@
 html {
     box-sizing: border-box;
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
 }
 *,
 *:after,
@@ -53,34 +55,35 @@ a:not([class]) {
     font-family: Roboto, sans-serif;
 }
 .tweet-text {
-    padding: 0 15px 0 15px;
+    padding: 0.3rem;
+    /* padding: 0 15px 0 15px; */
 }
 
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 53px;
+    height: 3.5rem;
     background: rgba(239, 234, 225, 0.2);
     border: 1px solid #efeae1;
     border-radius: 50px;
-    margin-top: 35px;
+    margin-top: 2.2rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .header_logo {
-    margin-left: 40px;
+    margin-left: 2rem;
 }
 .header_logo img {
-    width: 95px;
-    height: 75px;
+    width: 6rem;
     align-items: center;
-    transition: transform 0.2s;
+    transition: 0.2s;
 }
+
 .header_logo img:hover {
     transform: scale(1.1);
 }
 .user_name {
-    font-size: 24px;
+    font-size: 1.5rem;
     line-height: 28px;
     text-decoration-line: underline;
     color: #747474;
@@ -89,45 +92,49 @@ a:not([class]) {
 .header_user_info-block {
     display: flex;
     align-items: center;
-    margin-right: 40px;
+    margin-right: 2rem;
 }
 
 .footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 53px;
+    height: 3.5rem;
     background: rgba(239, 234, 225, 0.2);
     border: 1px solid #efeae1;
     box-sizing: border-box;
     border-radius: 50px;
     margin-top: auto;
     margin-bottom: 35px;
+    margin-bottom: 2.2rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .footer-info {
-    margin-left: 40px;
+    margin-left: 2rem;
     width: 200px;
     text-align: center;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 0.75rem;
     line-height: 16px;
     color: #747474;
 }
 .footer-github .svg-btn {
-    margin-right: 40px;
+    margin-right: 2rem;
 }
 .svg-btn {
     cursor: pointer;
     fill: #747474;
     width: 35px;
     height: 35px;
+    transition: 0.2s;
 }
 .svg {
     fill: #747474;
-    width: 50px;
-    height: 50px;
+    /* width: 50px; */
+    /* height: 50px; */
+    width: 3rem;
+    height: 3rem;
 }
 .avater-block {
     display: flex;
@@ -135,7 +142,7 @@ a:not([class]) {
 }
 .avater-block:hover {
     fill: #747474;
-    opacity: 0.75;
+    opacity: 0.85;
 }
 .header .avater-block {
     margin-right: 10px;
@@ -145,12 +152,13 @@ a:not([class]) {
     fill: #747474;
 }
 .svg-btn:hover {
-    opacity: 0.75;
+    opacity: 0.85;
+    transform: scale(1.1);
 }
 
 .new-tweet {
-    width: 493px;
-    height: 53px;
+    width: 430px;
+    height: 3.5rem;
     background: rgba(239, 234, 225, 0.2);
     border: 1px solid #efeae1;
     border-radius: 20px;
@@ -163,45 +171,25 @@ a:not([class]) {
 }
 
 .new-tweet_textarea {
-    width: 383px;
-    height: 36px;
+    width: 85%;
+    height: 2.5rem;
     background: #ffffff;
     border: 1px solid #747474;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 5px;
-    font-size: 18px;
+    padding-left: 0.7rem;
+    padding-top: 0.4rem;
+    font-size: 1rem;
     line-height: 21px;
-}
-
-.new-tweet_btn {
-    width: 50px;
-    height: 36px;
-    background: rgba(175, 203, 240, 0.45);
-    border: 1px solid #afcbf0;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 18px;
-    line-height: 21px;
-}
-
-.new-tweet_btn:hover {
-    background: rgba(175, 203, 240, 0.55);
-}
-
-.new-tweet_btn:active {
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 1.5rem;
 }
 
 .tweet-container {
-    width: 698px;
-    height: 210px;
+    max-width: 698px;
     background: rgba(239, 234, 225, 0.2);
     border: 1px solid #efeae1;
     border-radius: 30px;
-    padding: 15px;
-    margin-top: 25px;
+    padding: 1rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -224,7 +212,7 @@ a:not([class]) {
 }
 
 .tweet-content {
-    font-size: 18px;
+    font-size: 1rem;
     line-height: 21px;
 }
 .tweet-footer {
@@ -232,9 +220,17 @@ a:not([class]) {
     align-items: center;
     justify-content: space-between;
 }
+.comment-counter {
+    display: flex;
+}
+.comment-counter_number {
+    font-size: 16px;
+    margin-right: 5px;
+    margin-top: 2px;
+}
 .filter {
-    width: 290px;
-    max-height: 250px;
+    min-width: 290px;
+    height: 250px;
     background: rgba(239, 234, 225, 0.2);
     border: 1px solid #efeae1;
     box-sizing: border-box;
@@ -247,7 +243,7 @@ a:not([class]) {
     color: #747474;
     display: flex;
     justify-content: center;
-    font-size: 24px;
+    font-size: 1.5rem;
     line-height: 28px;
     margin-top: 5px;
 }
@@ -255,15 +251,15 @@ a:not([class]) {
     margin-top: 5px;
 }
 .filter-content {
-    width: 25px;
+    /* width: 25px; */
     position: absolute;
     background: rgba(239, 234, 225, 0.2);
     border: 1px solid rgba(116, 116, 116, 0.5);
     box-sizing: border-box;
     border-radius: 20px;
-    width: 250px;
+    width: 90%;
     bottom: 20px;
-    font-size: 18px;
+    font-size: 1.25rem;
     line-height: 21px;
     padding: 12px;
 }
@@ -276,20 +272,22 @@ a:not([class]) {
 .filter-item .filter-name {
     width: 45px;
 }
+.filter-name {
+    margin-right: 5px;
+}
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
+    min-width: 50px;
     height: 24px;
+    margin-right: 5px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     display: none;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -299,8 +297,8 @@ a:not([class]) {
     bottom: 0;
     background: #f0c9c5;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
 }
 
 .slider:before {
@@ -311,8 +309,8 @@ a:not([class]) {
     left: 2px;
     bottom: 2px;
     background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
 }
 
 input:checked + .slider {
@@ -331,7 +329,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
@@ -356,29 +353,46 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 25px;
+    margin-top: 1rem;
 }
 
 .main_content {
-    margin-right: 25px;
+    margin-right: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
 .btn {
-    width: 183px;
-    height: 53px;
     background: rgba(175, 203, 240, 0.45);
     border: 1px solid #afcbf0;
-    border-radius: 30px;
-    font-size: 24px;
-    line-height: 28px;
     color: #747474;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-top: 25px;
-    margin-bottom: 25px;
     cursor: pointer;
+    background: rgba(175, 203, 240, 0.45);
+    border: 1px solid #afcbf0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    transition: 0.2s;
+}
+
+.new-tweet_btn {
+    width: 4rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    line-height: 21px;
+    border-radius: 3px;
+    margin-left: 20px;
+}
+
+.load-more_btn {
+    width: 183px;
+    height: 53px;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    line-height: 28px;
+    margin-top: 1rem;
+    margin-bottom: 25px;
 }
 
 .btn:hover {
@@ -387,4 +401,54 @@ input:checked + .slider:before {
 
 .btn:active {
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.tweet-text span {
+    background-color: #d197f0;
+    color: #d3f0e1;
+    cursor: pointer;
+}
+
+@media (max-width: 1250px) {
+    .body {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
+    .body {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .main {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+    .main_content {
+        margin-right: 0px;
+    }
+    .filter {
+        margin-bottom: 25px;
+        left: 0;
+    }
+    .new-tweet {
+        width: 100%;
+    }
+}
+
+@media (max-width: 440px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    html {
+        font-size: 10px;
+    }
 }
