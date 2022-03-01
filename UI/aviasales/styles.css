@@ -1,0 +1,110 @@
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+*,
+*:after,
+*:before {
+    box-sizing: inherit;
+}
+body {
+    background-color: #e1e5ec;
+}
+.containet-item {
+    display: flex;
+
+    width: 729px;
+    height: 251px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.header-title {
+    font-size: 23px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.header-btn {
+    width: 174px;
+    height: 48px;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.375rem;
+    background-color: #ff6f32;
+    border-color: #ff6f32;
+    border-radius: 5px;
+    color: white;
+    margin: 20px 16px;
+}
+.header-btn:hover {
+    background-color: #ff6f32;
+    opacity: 0.9;
+}
+.containet-item_content {
+    width: 522px;
+    padding: 20px 17px 20px 20px;
+}
+.content-header {
+    display: flex;
+    height: 36px;
+    justify-content: space-between;
+    /* margin-left: 20px; */
+    /* border-bottom: 1px solid #dee2e6; */
+}
+.content-header img {
+    width: 36px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.containet-item_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #dee2e6;
+}
+.btn {
+    cursor: pointer;
+}
+.block-left {
+    display: flex;
+}
+.block-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.block-right_item-circl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: 1px silver;
+    border-radius: 50%;
+    border: 1px solid #f6f6f6;
+}
+.block-right_item-circl svg {
+    fill: #f54759;
+}
+.block-right_item svg:hover {
+    fill: #0c73fe;
+}
+.block-right_item {
+    margin-left: 5px;
+}
+.content-main {
+    margin-top: 1.5rem;
+}
+.content-main_left-header {
+    font-size: 1.75rem;
+}
+.content-main_left-main {
+    color: #9ea9b7;
+    font-size: 0.75rem;
+    line-height: 1.5em;
+}
+.content-main_left-footer {
+    color: #9ea9b7;
+    font-size: 0.75rem;
+    line-height: 1.5em;
+}
