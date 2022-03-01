@@ -121,6 +121,15 @@ a:not([class]) {
     line-height: 16px;
     color: #747474;
 }
+h1 {
+    display: inline-block;
+    font-size: 0.75rem;
+    line-height: 16px;
+    color: #747474;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+}
 .footer-github .svg-btn {
     margin-right: 2rem;
 }
