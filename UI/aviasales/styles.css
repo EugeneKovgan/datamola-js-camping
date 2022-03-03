@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box;
     font-size: 16px;
+    font-family: Inter, Tahoma, sans-serif;
 }
 *,
 *:after,
@@ -10,9 +11,15 @@ html {
 body {
     background-color: #e1e5ec;
 }
-.containet-item {
+.container {
     display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
 
+.containet-item {
+    margin-top: 20px;
+    display: flex;
     width: 729px;
     height: 251px;
     background-color: white;
@@ -20,9 +27,10 @@ body {
 }
 
 .header-title {
+    font-family: -apple-system, BlinkMacSystemFont, Inter, Roboto, Helvetica, Arial, sans-serif;
     font-size: 23px;
     font-weight: 700;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .header-btn {
     width: 174px;
@@ -34,7 +42,7 @@ body {
     border-color: #ff6f32;
     border-radius: 5px;
     color: white;
-    margin: 20px 16px;
+    margin: 10px 16px;
 }
 .header-btn:hover {
     background-color: #ff6f32;
@@ -51,10 +59,17 @@ body {
     /* margin-left: 20px; */
     /* border-bottom: 1px solid #dee2e6; */
 }
+.content-main_main_header_text {
+    font-size: 0.75rem;
+}
 .content-header img {
     width: 36px;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+.content-header img:hover:after {
+    content: attr(alt);
 }
 .containet-item_header {
     display: flex;
@@ -97,11 +112,14 @@ body {
 .content-main {
     display: flex;
     justify-content: space-between;
-    margin-top: 1.5rem;
+    margin-top: 1.15rem;
 }
 .content-main_left-header,
 .content-main_right-header {
+    /* font-family: Inter, Tahoma, sans-serif; */
     font-size: 1.75rem;
+    line-height: 1em;
+    /* margin-bottom: 5px; */
 }
 .content-main_left-main,
 .content-main_right-main {
@@ -183,13 +201,12 @@ svg {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 } */
-
-.green-btn {
+.header-btn-color {
     position: absolute;
     top: -10px;
-    width: 125px;
+    /* width: 125px; */
     height: 21px;
-    background-color: #35c768;
+    /* background-color: #35c768; */
     font-size: 13px;
     line-height: 17px;
     border-radius: 30px;
@@ -202,4 +219,29 @@ svg {
     font-weight: 600;
     color: white;
     cursor: pointer;
+}
+.green-btn {
+    background-color: #35c768;
+}
+.purple-btn {
+    background-color: #b983f1;
+}
+.separation {
+    margin-top: 12px;
+    margin-bottom: -8px;
+    border-bottom: 1px solid #dee2e6;
+    align-items: center;
+}
+
+.header-title-bottom {
+    color: #ff6f32;
+    text-align: center;
+    /* color: #0c73fe; */
+    font-size: 0.825rem;
+    line-height: 1.5;
+    font-weight: 600;
+    /* display: flex; */
+    /* flex-direction: row; */
+    align-items: center;
+    justify-content: space-between;
 }
