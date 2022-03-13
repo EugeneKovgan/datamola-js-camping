@@ -65,7 +65,7 @@ export const tweets = [
     {
         id: "8",
         text: "Приходи в гости #js",
-        createdAt: new Date("2022-03-09T23:00:22"),
+        createdAt: new Date("2022-03-09T23:00:23"),
         author: "snow",
         comments: [],
     },
@@ -100,7 +100,7 @@ export const tweets = [
     {
         id: "12",
         text: "Приходи в гости #datamola",
-        createdAt: new Date("2022-03-19T23:20:22"),
+        createdAt: new Date("2022-03-19T23:20:24"),
         author: "Пётр Петров",
         comments: [],
     },
@@ -135,14 +135,14 @@ export const tweets = [
     {
         id: "16",
         text: "Приходи в гости #datamola",
-        createdAt: new Date("2022-03-10T23:00:22"),
+        createdAt: new Date("2022-03-10T23:00:25"),
         author: "Пётр Петров",
         comments: [],
     },
     {
         id: "17",
         text: "Всё хорошо! #js",
-        createdAt: new Date("2022-03-09T23:11:20"),
+        createdAt: new Date("2022-03-09T23:11:27"),
         author: "Пётр Петров",
         comments: [],
     },
@@ -156,14 +156,14 @@ export const tweets = [
     {
         id: "19",
         text: "Давай завтра! #js",
-        createdAt: new Date("2022-03-09T23:32:20"),
+        createdAt: new Date("2022-03-09T23:32:26"),
         author: "Пётр Петров",
         comments: [],
     },
     {
         id: "20",
         text: "Приходи в гости #js",
-        createdAt: new Date("2022-03-09T23:00:22"),
+        createdAt: new Date("2022-03-09T23:00:29"),
         author: "Пётр Петров",
         comments: [],
     },
@@ -177,7 +177,7 @@ export const tweets = [
     {
         id: "22",
         text: "Потом #js",
-        createdAt: new Date("2022-03-09T23:00:22"),
+        createdAt: new Date("2022-03-09T23:00:31"),
         author: "Пётр Петров",
         comments: [],
     },
