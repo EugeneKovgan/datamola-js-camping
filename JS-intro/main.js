@@ -3,7 +3,7 @@ import { tweets } from "./tweets_arr.js";
 (function () {
     console.log("module ready");
 
-    let user;
+    let user = "user";
 
     function getTweets(skip = 0, top = 10, filterConfig = {}) {
         let result = tweets;
@@ -47,7 +47,7 @@ import { tweets } from "./tweets_arr.js";
             tw.text.length <= 280 &&
             tw.createdAt &&
             tw.author &&
-            validateComment(com)
+            validateComment(tw)
         ) {
             return true;
         } else {
@@ -66,11 +66,32 @@ import { tweets } from "./tweets_arr.js";
         }
     }
 
-    function addTweet(text) {}
+    function addTweet(text) {
+        const newTweet = {};
+        newTweet.id = Math.random().toString(36).substr(2, 9);
+        newTweet.text = text;
+        newTweet.createdAt = new Date();
+        newTweet.author = user;
+        newTweet.comments = [];
+        console.log(newTweet);
+        if (validateTweet(newTweet)) {
+            tweets.push(newTweet);
+            // tweets = { ...tweets, ...newTweet };
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // function addComment(id, text) {
+    //     const commentedTweet = getTweet(id);
+    //     if (commentedTweet) {
+    //         const newComment = {};
+    //     }
+    // }
 
     function editTweet(id, text) {
         const tweet = getTweet(id);
-        // console.log(tweet);
         if (tweet.author === user && validateTweet(tweet)) {
             tweet[0].text = text;
             return true;
@@ -94,15 +115,29 @@ import { tweets } from "./tweets_arr.js";
     }
 
     // for check
+    console.log(tweets);
 
-    console.log(getTweets(0, 10));
-    console.log(getTweets(10, 10));
-    console.log(getTweets(0, 10, { author: "snow" }));
-    console.log(getTweets(0, 10, { author: "Snow" }));
-    console.log(getTweets(0, 10, { text: "#" }));
-    console.log(getTweet("7"));
-    console.log(editTweet("7", "hi"));
-    console.log(removeTweet(9));
+    // console.log(getTweets(0, 10));
+    // console.log(getTweets(10, 10));
+    // console.log(getTweets(0, 10, { author: "snow" }));
+    // console.log(getTweets(0, 10, { author: "Snow" }));
+    // console.log(getTweets(0, 10, { text: "#" }));
+    // console.log(getTweet("7"));
+    // console.log(editTweet("7", "hi"));
+    // console.log(removeTweet(9));
+    console.log(addTweet("text"));
 
-    return { getTweets, getTweet, validateTweet, validateComment, editTweet, changeUser, removeTweet };
+    console.log(tweets);
+
+    return {
+        getTweets,
+        getTweet,
+        validateTweet,
+        validateComment,
+        editTweet,
+        changeUser,
+        removeTweet,
+        addTweet,
+        addComment,
+    };
 })();
