@@ -59,7 +59,7 @@ export const tweets = [
         id: "7",
         text: "Всё хорошо! #js",
         createdAt: new Date("2022-03-09T23:00:20"),
-        author: "Пётр Петров",
+        author: "user",
         comments: [],
     },
     {
