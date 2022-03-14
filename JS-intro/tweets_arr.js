@@ -73,7 +73,7 @@ export const tweets = [
         id: "9",
         text: "Привет! #js #datamola",
         createdAt: new Date("2022-03-09T23:00:00"),
-        author: "Иванов Иван",
+        author: "user",
         comments: [],
     },
     {

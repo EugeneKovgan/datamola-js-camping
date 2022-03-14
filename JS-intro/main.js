@@ -3,7 +3,7 @@ import { tweets } from "./tweets_arr.js";
 (function () {
     console.log("module ready");
 
-    let user = "user";
+    let user;
 
     function getTweets(skip = 0, top = 10, filterConfig = {}) {
         let result = tweets;
@@ -67,28 +67,39 @@ import { tweets } from "./tweets_arr.js";
     }
 
     function addTweet(text) {
+        user = "user"; // для работы добавления твита
         const newTweet = {};
         newTweet.id = Math.random().toString(36).substr(2, 9);
         newTweet.text = text;
         newTweet.createdAt = new Date();
         newTweet.author = user;
         newTweet.comments = [];
-        console.log(newTweet);
+        // console.log(newTweet);
         if (validateTweet(newTweet)) {
             tweets.push(newTweet);
-            // tweets = { ...tweets, ...newTweet };
+            // tweets = { ...tweets, ...newTweet }; // вместо push
             return true;
         } else {
             return false;
         }
     }
 
-    // function addComment(id, text) {
-    //     const commentedTweet = getTweet(id);
-    //     if (commentedTweet) {
-    //         const newComment = {};
-    //     }
-    // }
+    function addComment(id, text) {
+        const commentedTweet = getTweet(id);
+        if (commentedTweet) {
+            const newComment = {};
+            newComment.id = Math.random().toString(36).substr(2, 9);
+            newComment.text = text;
+            newComment.createdAt = new Date();
+            newComment.author = user;
+            if (validateComment(newComment)) {
+                commentedTweet[0].comments.push(newComment);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     function editTweet(id, text) {
         const tweet = getTweet(id);
@@ -117,15 +128,34 @@ import { tweets } from "./tweets_arr.js";
     // for check
     console.log(tweets);
 
-    // console.log(getTweets(0, 10));
-    // console.log(getTweets(10, 10));
-    // console.log(getTweets(0, 10, { author: "snow" }));
-    // console.log(getTweets(0, 10, { author: "Snow" }));
-    // console.log(getTweets(0, 10, { text: "#" }));
-    // console.log(getTweet("7"));
-    // console.log(editTweet("7", "hi"));
-    // console.log(removeTweet(9));
-    console.log(addTweet("text"));
+    console.log(getTweets(0, 10)); // должен отсортировать твиты по дате создания и вернуть первые 10 твитов.
+    console.log(getTweets(10, 10)); //должен отсортировать твиты по дате создания и вернуть 10 твитов, начиная с 11-ого.
+    console.log(getTweets(0, 10, { author: "snow" })); // должен выбрать те твиты, где автор содержит подстроку ‘snow’, отсортировать твиты по дате создания, вернуть первые 10 твитов.
+    console.log(getTweets(0, 10, { author: "Snow" })); // должен выбрать те твиты, где автор содержит подстроку ‘snow’, отсортировать твиты по дате создания, вернуть первые 10 твитов.
+    console.log(getTweets(0, 10, { text: "#js" })); // отсортировать твиты с #js
+    console.log(getTweet("7")); // получить твит id7
+    console.log(validateTweet("2")); // не валидный твит
+    console.log(
+        validateTweet({
+            id: "77",
+            text: "Всё хорошо! #js",
+            createdAt: "Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)",
+            author: "Пётр Петров",
+        })
+    ); // валидный твит
+    console.log(validateComment("2")); // не валидный соммент
+    console.log(
+        validateComment({
+            id: "77",
+            text: "Всё хорошо! #js",
+            createdAt: "Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)",
+            author: "Пётр Петров",
+        })
+    ); // валидный коммент
+    console.log(editTweet("7", "hi")); // редактирование твита
+    console.log(removeTweet("9")); // удаление твита
+    console.log(addTweet("text")); //добавление твита
+    console.log(addComment("2", "text")); // добавление комментария к твиту
 
     console.log(tweets);
 
