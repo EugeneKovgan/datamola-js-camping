@@ -1,7 +1,7 @@
 console.log("ready");
 
 let arr_1 = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-let arr_2 = [7, 1, 5, 3, 6, 4];
+// let arr_2 = [7, 1, 5, 3, 6, 4];
 
 function getMaxSubSum(arr) {
     let maxSum = 0;

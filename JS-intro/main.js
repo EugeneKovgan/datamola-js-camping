@@ -3,10 +3,10 @@ import { tweets } from "./tweets_arr.js";
 (function () {
     console.log("module ready");
 
-    let user;
+    let user = "user";
 
     function getTweets(skip = 0, top = 10, filterConfig = {}) {
-        let result = tweets;
+        let result = JSON.parse(JSON.stringify(tweets));
 
         if (filterConfig) {
             if (filterConfig.author) {
@@ -36,7 +36,7 @@ import { tweets } from "./tweets_arr.js";
     }
 
     function getTweet(id) {
-        return tweets.filter((tweet) => tweet.id === id);
+        return tweets.find((tweet) => tweet.id === id);
     }
 
     function validateTweet(tw) {
@@ -44,6 +44,7 @@ import { tweets } from "./tweets_arr.js";
             tw.id &&
             tw.text &&
             tw.text != "" &&
+            typeof tw.text === "string" &&
             tw.text.length <= 280 &&
             tw.createdAt &&
             tw.author &&
@@ -57,8 +58,12 @@ import { tweets } from "./tweets_arr.js";
 
     function validateComment(com) {
         if (
-            com == "" ||
-            (com.id && com.text && com.text != "" && com.text.length <= 280 && com.createdAt && com.author)
+            com.id &&
+            com.text !== "" &&
+            typeof com.text === "string" &&
+            com.text.length <= 280 &&
+            com.createdAt &&
+            com.author
         ) {
             return true;
         } else {
@@ -67,17 +72,14 @@ import { tweets } from "./tweets_arr.js";
     }
 
     function addTweet(text) {
-        user = "user"; // для работы добавления твита
         const newTweet = {};
-        newTweet.id = Math.random().toString(36).substr(2, 9);
+        newTweet.id = genereteId();
         newTweet.text = text;
         newTweet.createdAt = new Date();
         newTweet.author = user;
         newTweet.comments = [];
-        // console.log(newTweet);
         if (validateTweet(newTweet)) {
             tweets.push(newTweet);
-            // tweets = { ...tweets, ...newTweet }; // вместо push
             return true;
         } else {
             return false;
@@ -88,12 +90,12 @@ import { tweets } from "./tweets_arr.js";
         const commentedTweet = getTweet(id);
         if (commentedTweet) {
             const newComment = {};
-            newComment.id = Math.random().toString(36).substr(2, 9);
+            newComment.id = genereteId();
             newComment.text = text;
             newComment.createdAt = new Date();
             newComment.author = user;
             if (validateComment(newComment)) {
-                commentedTweet[0].comments.push(newComment);
+                commentedTweet.comments.push(newComment);
                 return true;
             } else {
                 return false;
@@ -101,10 +103,14 @@ import { tweets } from "./tweets_arr.js";
         }
     }
 
+    function genereteId() {
+        return Math.random().toString(36).substr(2, 9);
+    }
+
     function editTweet(id, text) {
         const tweet = getTweet(id);
         if (tweet.author === user && validateTweet(tweet)) {
-            tweet[0].text = text;
+            tweet.text = text;
             return true;
         } else {
             return false;
@@ -116,7 +122,7 @@ import { tweets } from "./tweets_arr.js";
         if (tweet.author === user) {
             return true;
         } else {
-            tweets = tweets.filter((tweet) => tweet.id === id);
+            tweets = tweets.filter((item) => item.id !== id);
         }
         return false;
     }
