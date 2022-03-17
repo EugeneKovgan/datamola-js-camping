@@ -47,7 +47,7 @@ import { tweets } from "./tweets_arr.js";
                 tw.text.length <= 280 &&
                 typeof tw.text === "string" &&
                 tw.createdAt !== "" &&
-                (typeof tw.createdAt === "object" || typeof tw.createdAt === "string") &&
+                typeof tw.createdAt === "object" &&
                 tw.author !== "" &&
                 typeof tw.author === "string",
             validateComment(tw))
@@ -65,7 +65,7 @@ import { tweets } from "./tweets_arr.js";
             typeof com.text === "string" &&
             com.text.length <= 280 &&
             typeof com.text === "string" &&
-            (typeof com.createdAt === "object" || typeof com.createdAt === "string") &&
+            typeof com.createdAt === "object" &&
             com.author !== ""
         ) {
             return true;
@@ -148,7 +148,7 @@ import { tweets } from "./tweets_arr.js";
         validateTweet({
             id: "77",
             text: "Всё хорошо! #js",
-            createdAt: "Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)",
+            createdAt: new Date("2022-03-09T23:00:00"),
             author: "Пётр Петров",
             comments: [],
         })
@@ -158,14 +158,13 @@ import { tweets } from "./tweets_arr.js";
         validateComment({
             id: "77",
             text: "Всё хорошо! #js",
-            createdAt: "Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)",
+            createdAt: new Date("2022-03-09T23:00:00"),
             author: "Пётр Петров",
         })
     ); // валидный коммент
     console.log(editTweet("7", "hi")); // редактирование твита
     console.log(removeTweet("9")); // удаление твита
     console.log(addTweet("text")); //добавление твита
-    console.log(addComment("2", "text")); // добавление комментария к твиту
     console.log(addComment("2", "text")); // добавление комментария к твиту
 
     console.log(tweets);
