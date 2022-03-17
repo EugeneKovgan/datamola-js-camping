@@ -41,14 +41,16 @@ import { tweets } from "./tweets_arr.js";
 
     function validateTweet(tw) {
         if (
-            tw.id &&
-            tw.text &&
-            tw.text != "" &&
-            typeof tw.text === "string" &&
-            tw.text.length <= 280 &&
-            tw.createdAt &&
-            tw.author &&
-            validateComment(tw)
+            (typeof tw.id === "string" &&
+                tw.text !== "" &&
+                typeof tw.text === "string" &&
+                tw.text.length <= 280 &&
+                typeof tw.text === "string" &&
+                tw.createdAt !== "" &&
+                (typeof tw.createdAt === "object" || typeof tw.createdAt === "string") &&
+                tw.author !== "" &&
+                typeof tw.author === "string",
+            validateComment(tw))
         ) {
             return true;
         } else {
@@ -58,12 +60,13 @@ import { tweets } from "./tweets_arr.js";
 
     function validateComment(com) {
         if (
-            com.id &&
+            typeof com.id === "string" &&
             com.text !== "" &&
             typeof com.text === "string" &&
             com.text.length <= 280 &&
-            com.createdAt &&
-            com.author
+            typeof com.text === "string" &&
+            (typeof com.createdAt === "object" || typeof com.createdAt === "string") &&
+            com.author !== ""
         ) {
             return true;
         } else {
@@ -120,11 +123,11 @@ import { tweets } from "./tweets_arr.js";
     function removeTweet(id) {
         const tweet = getTweet(id);
         if (tweet.author === user) {
+            tweets.splice(tweet.id, 1);
             return true;
         } else {
-            tweets = tweets.filter((item) => item.id !== id);
+            return false;
         }
-        return false;
     }
 
     function changeUser(usr) {
@@ -147,6 +150,7 @@ import { tweets } from "./tweets_arr.js";
             text: "Всё хорошо! #js",
             createdAt: "Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)",
             author: "Пётр Петров",
+            comments: [],
         })
     ); // валидный твит
     console.log(validateComment("2")); // не валидный соммент
@@ -161,6 +165,7 @@ import { tweets } from "./tweets_arr.js";
     console.log(editTweet("7", "hi")); // редактирование твита
     console.log(removeTweet("9")); // удаление твита
     console.log(addTweet("text")); //добавление твита
+    console.log(addComment("2", "text")); // добавление комментария к твиту
     console.log(addComment("2", "text")); // добавление комментария к твиту
 
     console.log(tweets);
