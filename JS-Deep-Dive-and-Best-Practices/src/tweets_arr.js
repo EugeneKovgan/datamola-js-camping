@@ -1,4 +1,4 @@
-export const tweets = [
+export const tweetsArr = [
   {
     id: '1',
     text: 'Привет! #js #datamola',

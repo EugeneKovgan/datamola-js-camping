@@ -13,7 +13,11 @@
     "max-len": ["error", 150],
     "func-names": "off",
     "import/prefer-default-export": "off",
-    "max-classes-per-file": ["error", 2]
+    "max-classes-per-file": ["error", 2],
+    "parserOptions": {
+      // Required for certain syntax usages
+      "ecmaVersion": 2020
+    }
     // "prefer-destructuring": "off"
     // "operator-linebreak": [2, "after", { "overrides": { "?": "after" } }]
   }
