@@ -107,12 +107,13 @@ class Comment {
 class TweetCollection {
   _tweets;
   _user;
+  // _createdAt;
   constructor(tweets) {
     this._tweets = tweets;
   }
   getPage(skip = 0, top = 10, filterConfig = {}) {
     let result = JSON.parse(JSON.stringify(tweets));
-
+    // console.log(result);
     if (filterConfig) {
       if (filterConfig.author) {
         result = result.filter((tweet) =>
@@ -121,10 +122,13 @@ class TweetCollection {
       }
       if (filterConfig.dateFrom) {
         result = result.filter((tweet) => {
+          // console.log(tweet);
+          // debugger;
           tweet.createdAt >= filterConfig.dateFrom;
         });
       }
       if (filterConfig.dateTo) {
+        // debugger;
         result = result.filter((tweet) => tweet.createdAt <= filterConfig.dateTo);
       }
       if (filterConfig.hashtags) {
@@ -135,16 +139,24 @@ class TweetCollection {
       if (filterConfig.text) {
         result = result.filter((tweet) => tweet.text.includes(filterConfig.text));
       }
-      result.sort((a, b) => a.createdAt - b.createdAt);
+      result.sort((a, b) => {
+        if (a._createdAt > b._createdAt) {
+          return 1;
+        }
+        if (a._createdAt < b._createdAt) {
+          return -1;
+        }
+        return 0;
+      });
       return result.slice(skip, skip + top);
     }
   }
-  get(id) {
+  _get(id) {
     return tweets.find((tweet) => tweet.id === id);
   }
 
-  edit(id, text) {
-    const tweet = this.get(id);
+  _edit(id, text) {
+    const tweet = this._get(id);
     if (tweet.author === user && Tweet.validate(tweet)) {
       tweet.text = text;
       return true;
@@ -153,8 +165,8 @@ class TweetCollection {
     }
   }
 
-  remove(id) {
-    const tweet = this.get(id);
+  _remove(id) {
+    const tweet = this._get(id);
     if (tweet.author === user) {
       tweets.splice(tweet.id, 1);
       return true;
@@ -162,13 +174,14 @@ class TweetCollection {
       return false;
     }
   }
-  genereteId() {
+
+  _genereteId() {
     return Math.random().toString(36).substr(2, 9);
   }
 
-  add(text) {
+  _add(text) {
     const newTweet = {};
-    newTweet.id = this.genereteId();
+    newTweet.id = this._genereteId();
     newTweet.text = text;
     newTweet.createdAt = new Date();
     newTweet.author = user;
@@ -181,11 +194,11 @@ class TweetCollection {
     }
   }
 
-  addComment(id, text) {
-    const commentedTweet = this.get(id);
+  _addComment(id, text) {
+    const commentedTweet = this._get(id);
     if (commentedTweet) {
       const newComment = {};
-      newComment.id = this.genereteId();
+      newComment.id = this._genereteId();
       newComment.text = text;
       newComment.createdAt = new Date();
       newComment.author = user;
@@ -210,37 +223,37 @@ class TweetCollection {
 // console.log(tweets);
 
 const tweets = [
-  new Tweet('1', 'Привет! #js #datamola', new Date('2022-03-09T23:00:00'), 'Иванов Иван', []),
+  new Tweet('1', 'Привет! #js #datamola', new Date('2021-01-09T23:00:00'), 'Иванов Иван', []),
   new Tweet('2', 'Какие дела?', new Date('2022-03-07T23:00:01'), 'Петров Петр', [
     new Comment('201', 'Хорошо, а у тебя?', new Date('2022-03-09T23:00:05'), 'Иванов Иван'),
   ]),
   new Tweet('3', 'Всё хорошо! #js', new Date('2022-03-07T23:00:20'), 'Пётр Петров', []),
 
-  new Tweet('4', 'Приходи в гости #js', new Date('2022-03-09T23:00:22'), 'snow', []),
-  new Tweet('5', 'Привет! #js #datamola', new Date('2022-03-09T23:00:00'), 'Иванов Иван', []),
-  new Tweet('6', 'Какие дела?', new Date('2022-03-09T23:00:01'), 'Петров Петр', [
+  new Tweet('4', 'Приходи в гости #js', new Date('2021-03-09T23:00:22'), 'snow', []),
+  new Tweet('5', 'Привет! #js #datamola', new Date('2022-02-09T23:00:00'), 'Иванов Иван', []),
+  new Tweet('6', 'Какие дела?', new Date('2022-02-09T23:00:01'), 'Петров Петр', [
     new Comment('601', 'Хорошо, а у тебя?', new Date('2022-03-09T23:00:05'), 'Иванов Иван'),
   ]),
-  new Tweet('7', 'Всё хорошо! #js', new Date('2022-03-09T23:00:20'), 'user', []),
-  new Tweet('8', 'Приходи в гости #js', new Date('2022-03-09T23:00:23'), 'snow', []),
+  new Tweet('7', 'Всё хорошо! #js', new Date('2020-03-09T23:00:20'), 'user', []),
+  new Tweet('8', 'Приходи в гости #js', new Date('2022-07-09T23:00:23'), 'snow', []),
   new Tweet('9', 'Привет! #js #datamola', new Date('2022-03-09T23:00:00'), 'user', []),
   new Tweet('10', 'Какие дела?', new Date('2022-03-09T23:00:01'), 'Петров Петр', [
-    new Comment('1001', 'Хорошо, а у тебя?', new Date('2022-03-09T23:08:05'), 'snow'),
+    new Comment('1001', 'Хорошо, а у тебя?', new Date('2021-03-09T23:08:05'), 'snow'),
   ]),
   new Tweet('11', 'Всё хорошо! #datamola', new Date('2022-03-09T23:00:20'), 'Пётр Петров', []),
-  new Tweet('12', 'Приходи в гости #datamola', new Date('2022-03-19T23:20:24'), 'Пётр Петров', []),
-  new Tweet('13', 'Привет! #js', new Date('2022-04-09T23:12:00'), 'Иванов Иван', []),
-  new Tweet('14', 'Какие дела?', new Date('2022-03-09T23:00:01'), 'Петров Петр', [
+  new Tweet('12', 'Приходи в гости #datamola', new Date('2021-03-19T23:20:24'), 'Пётр Петров', []),
+  new Tweet('13', 'Привет! #js', new Date('2025-04-09T23:12:00'), 'Snow', []),
+  new Tweet('14', 'Какие дела?', new Date('2023-03-09T23:00:01'), 'Петров Петр', [
     new Comment('1401', 'Хорошо, а у тебя?', new Date('2022-03-09T23:00:05'), 'Иванов Иван'),
   ]),
   new Tweet('15', 'Сегодня не могу! #js', new Date('2022-03-09T22:00:20'), 'Пётр Петров', []),
   new Tweet('16', 'Приходи в гости #datamola', new Date('2022-03-10T23:00:25'), 'Пётр Петров', []),
-  new Tweet('17', 'Всё хорошо! #js', new Date('2022-03-09T23:11:27'), 'Пётр Петров', []),
+  new Tweet('17', 'Всё хорошо! #js', new Date('2021-03-09T23:11:27'), 'Пётр Петров', []),
   new Tweet('18', 'Приходи в гости #datamola', new Date('2022-03-19T23:00:32'), 'Пётр Петров', []),
-  new Tweet('19', 'Давай завтра! #js', new Date('2022-03-09T23:32:26'), 'Пётр Петров', []),
-  new Tweet('20', 'Приходи в гости #js', new Date('2022-03-09T23:00:29'), 'Пётр Петров', []),
-  new Tweet('21', 'В другой раз! #js', new Date('2022-03-09T23:32:20'), 'Пётр Петров', []),
-  new Tweet('22', 'Потом #js', new Date('2022-03-09T23:00:31'), 'Пётр Петров', []),
+  new Tweet('19', 'Давай завтра! #js', new Date('2020-03-05T23:32:26'), 'Пётр Петров', []),
+  new Tweet('20', 'Приходи в гости #js', new Date('2022-01-09T23:00:29'), 'Пётр Петров', []),
+  new Tweet('21', 'В другой раз! #js', new Date('2022-03-09T23:32:20'), 'SnoW', []),
+  new Tweet('22', 'Потом #js', new Date('2022-08-09T23:00:31'), 'Пётр Петров', []),
 ];
 console.log(tweets); // создание массива твитов с помощью конструктора
 
@@ -258,7 +271,7 @@ console.log(tweetCollection.getPage(0, 10)); // должен отсортиро�
 console.log(tweetCollection.getPage(10, 10)); //должен отсортировать твиты по дате создания и вернуть 10 твитов, начиная с 11-ого.
 console.log(tweetCollection.getPage(0, 10, { author: 'snow' })); // должен выбрать те твиты, где автор содержит подстроку ‘snow’, отсортировать
 console.log(tweetCollection.getPage(0, 10, { text: '#js' })); // отсортировать твиты с #js
-console.log(tweetCollection.get('7')); // получить твит id7
+console.log(tweetCollection._get('7')); // получить твит id7
 console.log(Tweet.validate('2')); // не валидный твит
 console.log(
   Tweet.validate({
@@ -278,9 +291,9 @@ console.log(
     author: 'Пётр Петров',
   }),
 ); // валидный коммент
-console.log(tweetCollection.edit('7', 'hi')); // редактирование твита
-console.log(tweetCollection.get('7')); // получить твит id7
-console.log(tweetCollection.remove('9')); // удаление твита
-console.log(tweetCollection.add('text')); //добавление твита
-console.log(tweetCollection.addComment('2', 'text')); // добавление комментария к твиту
+console.log(tweetCollection._edit('7', 'hi')); // редактирование твита
+console.log(tweetCollection._get('7')); // получить твит id7
+console.log(tweetCollection._remove('9')); // удаление твита
+console.log(tweetCollection._add('text')); //добавление твита
+console.log(tweetCollection._addComment('2', 'text')); // добавление комментария к твиту
 console.log(tweets);
