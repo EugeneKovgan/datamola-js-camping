@@ -40,7 +40,7 @@ class List {
     }
     if (index === 0) {
       this.head = new Node(value, this.head);
-      return;
+      return true;
     }
     if (index) {
       const node = new Node(value);
@@ -58,16 +58,17 @@ class List {
       this.size++;
     }
     this.insertLast(value);
+    return true;
   }
 
   removeNode(index) {
-    if (index > 0 && index > this.size) {
-      return false;
-    }
+    if (index > 0 && index > this.size ||this.size ===1) {
+      return false;    }
+
     let current = this.head;
     let previous;
     let count = 0;
-    if (index === 0) {
+    if(!index || index===0){
       this.head = current.next;
     } else {
       while (count < index) {
@@ -78,6 +79,7 @@ class List {
       previous.next = current.next;
     }
     this.size--;
+    return true
   }
 
   toArray() {
@@ -97,15 +99,39 @@ class List {
   }
 }
 
-const list = new List();
-list.addNode(1);
-list.addNode(2);
-list.addNode(4);
-list.addNode(5, 0);
-list.addNode(6, 2);
-list.addNode(7, 10);
-list.addNode(8);
+// const list = new List();
+// list.addNode(1);
+// list.addNode(2);
+// list.addNode(4);
+// list.addNode(5, 0);
+// list.addNode(6, 2);
+// list.addNode(7, 10);
+// list.addNode(8);
 
-list.removeNode(1);
-console.log(list.print());
+// list.removeNode(1);
+// list.removeNode(0);
+// list.removeNode();
+// console.log(list.print());
+
+let list = new List(1);
+console.log(list);
+console.log(list.addNode(2)); //true
+console.log(list.addNode(3, 1)); //true
+console.log(list.print(), list);
+console.log(list.addNode(33, 1)); //true
+console.log(list.print(), list);
+console.log(list.addNode(0, 10)); //false
+console.log(list.print(), list);
+console.log(list.removeNode(0)); //true
+console.log(list.print(), list);
+console.log(list.removeNode(2)); //true
+console.log(list.print(), list);
+console.log(list.removeNode(10)); //false
+console.log(list.print(), list);
+console.log(list.removeNode()); //true
+console.log(list.print(), list);
+console.log(list.removeNode()); //false
+console.log(list.print(), list);
+console.log(list.removeNode()); //false
+console.log(list.print(), list);
 
