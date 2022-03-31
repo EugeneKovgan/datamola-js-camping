@@ -7,9 +7,7 @@ import TweetView from './TweetView.js';
 import TweetFeedView from "./TweetFeedView .js";
 import FilterView from "./FilterView.js";
 
-const user = 'Gust Gust';
-
-
+let user = 'Gust';
 
 // ++++++++++++++     tests    ++++++++++++
 
@@ -58,9 +56,11 @@ const tweets = [
 ];
 const tweetCollection = new TweetCollection(); // для проверки следующих методов  
 
-
 const currentUser = new HeaderView('avatar_block');
-currentUser.display(user)
+function setCurrentUser(user){
+  user = user
+  currentUser.display(user)  
+}
 
 const tweetView = new TweetView('tweet_container')
 tweetView.display(newTweet)
@@ -262,8 +262,6 @@ filterView.display(tweets)
 //   },
 // ];
 
-
-
 // let newTweet = new Tweet(
 //   '78',
 //   'Всё хорошо! #js',
@@ -272,8 +270,6 @@ filterView.display(tweets)
 //   );
 // console.log(newTweet); // создание 1 твита с помощью конструктора
     
-// console.log(tweets); // создание массива твитов с помощью конструктора
-
 // console.log(tweetCollection.getPage(0, 10)); // должен отсортировать твиты по дате создания и вернуть первые 10 твитов.
 // console.log(tweetCollection.getPage(10, 10)); //должен отсортировать твиты по дате создания и вернуть 10 твитов, начиная с 11-ого.
 // console.log(tweetCollection.getPage(0, 10, { author: 'snow' })); // должен выбрать те твиты, где автор содержит подстроку ‘snow’, отсортировать
@@ -307,4 +303,7 @@ filterView.display(tweets)
 // console.log(tweetCollection._addComment('2', 'text')); // добавление комментария к твиту
 
 // console.log(tweetCollection.addAll(tweets));
-// console.log(tweets);
+
+console.log(tweets);
+
+setCurrentUser('Илон Маск')

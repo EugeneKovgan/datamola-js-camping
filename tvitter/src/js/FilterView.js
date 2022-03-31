@@ -4,9 +4,8 @@ export default class FilterView  {
         // console.log(filter)
     }
     display(tweets){
-         let authorList =[];
-         
-         tweets.forEach(element => {authorList.push(element._author)});
+        let authorList =[];         
+        tweets.forEach(element => {authorList.push(element._author)});
         authorList=new Set (authorList)
         const filter_name = filter.querySelector('.filter_name');
         authorList.forEach(element => {           
