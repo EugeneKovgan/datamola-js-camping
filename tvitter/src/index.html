@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thyme</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
   </head>
 
   <body>
@@ -15,8 +15,8 @@
           <a href=""><img src="./assets/logo.svg" alt="logo" /></a>
         </div>
         <div class="header_user_info-block">
-          <a class="avatar-block" href="">
-            <div class="user_name text" id="user_name">My Name</div>
+          <a class="avatar-block" id="avatar_block" href="">
+            <div class="user_name text">My Name</div>
             <div class="user_avatar">
               <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
             </div>
@@ -37,7 +37,7 @@
             <button class="new-tweet_btn btn">Add</button>
           </div>
 
-          <div class="tweet-container">
+          <div class="tweet-container" id="tweet_container">
             <div class="tweet_header">
               <div class="tweet_user_info-block">
                 <a class="avatar-block" href="">
@@ -138,6 +138,6 @@
         </div>
       </footer>
     </div>
-    <script src="./app.js"></script>
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>

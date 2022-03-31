@@ -1,4 +1,4 @@
-export const tweetsArr = [
+const tweets = [
   {
     id: '1',
     text: 'Привет! #js #datamola',
@@ -181,6 +181,12 @@ export const tweetsArr = [
     author: 'Пётр Петров',
     comments: [],
   },
+  {
+    id: '28',
+  },
+  {
+    id: '29',
+  },
 ];
 
-// export default tweets;
+export default tweets;
