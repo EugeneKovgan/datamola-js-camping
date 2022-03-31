@@ -1,4 +1,11 @@
-const user = 'user';
+const user = 'Gust';
+const avater_block = document.querySelector('.avatar-block');
+const userName = avater_block.querySelector('.user_name');
+userName.innerHTML= user;
+
+const tweet_container = document.querySelector('.tweet-container');
+const name = tweet_container.querySelector('.user_name')
+
 
 class Tweet {
   _id;
@@ -108,6 +115,7 @@ class TweetCollection {
   // _createdAt;
   constructor() {
     this._tweets = tweets;
+    // const user = 'user';
   }
 
   addAll(tws) {
@@ -165,6 +173,7 @@ class TweetCollection {
 
   _edit(id, text) {
     const tweet = this._get(id);
+    // const user = 'user';
     if (tweet) {
       if (tweet.author === user && Tweet.validate(tweet)) {
         tweet.text = text;
@@ -179,6 +188,7 @@ class TweetCollection {
 
   _remove(id) {
     const tweet = this._get(id);
+    // const user = 'user';
     if (tweet.author === user) {
       tweets.splice(tweet.id, 1);
       return true;
@@ -193,6 +203,7 @@ class TweetCollection {
 
   _add(text) {
     const newTweet = {};
+    // const user = 'user';
     newTweet.id = this._genereteId();
     newTweet.text = text;
     newTweet.createdAt = new Date();
@@ -210,6 +221,7 @@ class TweetCollection {
     const commentedTweet = this._get(id);
     if (commentedTweet) {
       const newComment = {};
+      // const user = 'user';
       newComment.id = this._genereteId();
       newComment.text = text;
       newComment.createdAt = new Date();

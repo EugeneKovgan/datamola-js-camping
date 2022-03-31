@@ -147,19 +147,19 @@ h1 {
   width: 3rem;
   height: 3rem;
 }
-.avater-block {
+.avatar-block {
   display: flex;
   align-items: center;
 }
 
-.avater-block:hover {
+.avatar-block:hover {
   fill: #747474;
   opacity: 0.85;
 }
-.header .avater-block {
+.header .avatar-block {
   margin-right: 10px;
 }
-.header .avater-block .svg {
+.header .avatar-block .svg {
   margin-top: 8px;
 }
 .svg-btn:hover,
