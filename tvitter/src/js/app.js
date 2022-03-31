@@ -5,6 +5,7 @@ import TweetCollection from './TweetCollection.js';
 import HeaderView from './HeaderView.js';
 import TweetView from './TweetView.js';
 import TweetFeedView from "./TweetFeedView .js";
+import FilterView from "./FilterView.js";
 
 const user = 'Gust Gust';
 
@@ -17,6 +18,7 @@ let newTweet = new Tweet(
   'Приходи в гости #datamola',
   'Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)',
   'Пётр Петров',
+  [],
   );
 
 const tweets = [
@@ -60,11 +62,14 @@ const tweetCollection = new TweetCollection(); // для проверки сле
 const currentUser = new HeaderView('avatar_block');
 currentUser.display(user)
 
-const tweetView = new TweetView('avatar_block')
+const tweetView = new TweetView('tweet_container')
 tweetView.display(newTweet)
 
 const tweetFeedView  = new TweetFeedView() 
 tweetFeedView.display(tweets);
+
+const filterView = new FilterView('filter')
+filterView.display(tweets)
 
 // const tweetsArr = [
 //   {
