@@ -16,11 +16,12 @@
         </div>
         <div class="header_user_info-block">
           <a class="avatar-block" href="">
-            <div class="user_name text">My Name</div>
+            <div class="user_name text" id="user_name">My Name</div>
             <div class="user_avatar">
               <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
             </div>
           </a>
+
           <div class="user_action">
             <a href="">
               <img class="svg-btn" src="./assets/bx_chevron-down.svg" alt="down" />
@@ -29,9 +30,12 @@
         </div>
       </header>
 
-      <main class="container tweet-page">
-        <button class="go-back_btn btn">Go back</button>
+      <main class="main container">
         <div class="main_content">
+          <div class="new-tweet">
+            <input class="new-tweet_textarea" type="text" placeholder="Text" />
+            <button class="new-tweet_btn btn">Add</button>
+          </div>
 
           <div class="tweet-container">
             <div class="tweet_header">
@@ -67,37 +71,58 @@
             </div>
           </div>
 
-          <div class="new-tweet">
-            <input class="new-tweet_textarea" type="text" placeholder="Text" />
-            <button class="new-tweet_btn btn">Add</button>
-          </div>
+          <button class="load-more_btn btn">Load more</button>
+        </div>
 
-          <div class="comment-container">
-            <div class="comment_header">
-              <div class="comment_user_info-block">
-                <a class="avatar-block" href="">
-                  <div class="user_avatar">
-                    <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
-                  </div>
-                  <div class="user_name text">My Name 1</div>
-                </a>
+        <div class="filter">
+          <div class="filter_header">
+            <div class="filter_header-name">Filter</div>
+            <img class="svg-btn" src="./assets/carbon_chevron-sort-up.svg" alt="up" />
+            <div class="filter-content">
+              <div class="filter-item">
+                <div class="filter-name">Name</div>
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+                <select class="filter_name" name="" id="">
+                  <option value="">Name_1</option>
+                  <option value="">Name_2</option>
+                </select>
+              </div>
+
+              <div class="filter-item">
+                <div class="filter-name">Date</div>
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+                <input class="filter_date" type="date" />
+              </div>
+
+              <div class="filter-item">
+                <div class="filter-name">Text</div>
+                <label class="switch">
+                  <input type="checkbox" />
+
+                  <span class="slider round"></span>
+                </label>
+                <input class="filter_text" type="text" />
+              </div>
+
+              <div class="filter-item">
+                <div class="filter-name">#</div>
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+                <select class="filter_hastag" name="" id="">
+                  <option value=""># trololo</option>
+                  <option value=""># tralala</option>
+                </select>
               </div>
             </div>
-            <div class="comment-content">
-              <p class="text comment-text">
-                lorem lorem lorem<span> #lorem</span> lorem lorem lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-                lorem
-              </p>
-            </div>
-            <div class="tweet-footer">
-              <div class="date-block text">16.01.2022 <span> / 15-20</span></div>
-            </div>
           </div>
-
-
-
         </div>
       </main>
 
