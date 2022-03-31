@@ -1,3 +1,4 @@
+import Comment from "./Comment.js";
 export default class Tweet {
     _id;
     _createdAt;

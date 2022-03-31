@@ -12,7 +12,7 @@ export default class TweetView {
      
         userName.innerHTML= newTweet._author; 
         tweetText.innerHTML = newTweet.text;
-        dateBlock.innerHTML = newTweet._createdAt.slice(0,18);           
+        dateBlock.innerHTML = newTweet._createdAt;                  
         if(newTweet.comments !='')
         {commentCounterNumber.innerHTML = newTweet.comments.length} else {commentCounterNumber.innerHTML = ''}
         }

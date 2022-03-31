@@ -1,3 +1,4 @@
+import Tweet from "./Tweet.js";
 import tweets from "./tweets_arr.js";
 export default class TweetCollection {
     _tweets;
@@ -93,7 +94,7 @@ export default class TweetCollection {
   
     _add(text) {
       const newTweet = {};
-      // const user = 'user';
+      const user = 'user';
       newTweet.id = this._genereteId();
       newTweet.text = text;
       newTweet.createdAt = new Date();

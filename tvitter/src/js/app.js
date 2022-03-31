@@ -11,13 +11,17 @@ let user = 'Gust';
 
 // ++++++++++++++     tests    ++++++++++++
 
-let newTweet = new Tweet(
-  '78',
-  'Приходи в гости #datamola',
-  'Mon Mar 07 2022 23:00:20 GMT+0300 (Moscow Standard Time)',
-  'Пётр Петров',
-  [],
-  );
+// let newTweet = new Tweet(
+//   '78',
+//   'Приходи в гости #datamola',
+//   new Date('2022-02-09T23:00:01'),
+//   'Пётр Петров',
+//   [],
+//   );
+
+let newTweet2 = new Tweet('6', 'Какие дела?', new Date('2022-02-09T23:00:01'), 'Петров Петр', [
+  new Comment('601', 'Хорошо, а у тебя?', new Date('2022-03-09T23:00:05'), 'Иванов Иван'),
+]);
 
 const tweets = [
     new Tweet('1', 'Привет! #js #datamola', new Date('2021-01-09T23:00:00'), 'Иванов Иван', []),
@@ -54,22 +58,34 @@ const tweets = [
     new Tweet('23', 'Потом #js'),
     new Tweet('24', 'Потом #js'),
 ];
+
 const tweetCollection = new TweetCollection(); // для проверки следующих методов  
 
 const currentUser = new HeaderView('avatar_block');
-function setCurrentUser(user){
-  user = user
-  currentUser.display(user)  
-}
 
 const tweetView = new TweetView('tweet_container')
-tweetView.display(newTweet)
+tweetView.display(newTweet2)
 
 const tweetFeedView  = new TweetFeedView() 
 tweetFeedView.display(tweets);
 
 const filterView = new FilterView('filter')
 filterView.display(tweets)
+
+function setCurrentUser(user){
+  user = user
+  currentUser.display(user)  
+}
+
+function addTweet(text){}
+
+function editTweet(id, text){}
+
+function removeTweet(id){}
+
+function getFeed(skip, top, filterConfig){}
+
+function showTweet(id){}
 
 // const tweetsArr = [
 //   {
