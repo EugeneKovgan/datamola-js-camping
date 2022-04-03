@@ -450,6 +450,7 @@ input:checked + .slider:before {
 .tweet-page {
   display: flex;
   flex-direction: row;
+  justify-content: space-between; /*   доп ?  */
 }
 
 @media (max-width: 1250px) {

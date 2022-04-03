@@ -3,14 +3,7 @@ export default class Tweet {
     _id;
     _createdAt;
     _author;
-    // перебор массива объектов для создания списка через конструктор
-    // constructor(item) {
-    //   this._id = item.id;
-    //   this.text = item.text;
-    //   this._createdAt = item.createdAt;
-    //   this._author = item.author;
-    //   this.comments = item.comments;
-    constructor(id, text, createdAt, author, comments) {
+    constructor({id, text, createdAt, author, comments}) {
       this._id = id;
       this.text = text;
       this._createdAt = createdAt;

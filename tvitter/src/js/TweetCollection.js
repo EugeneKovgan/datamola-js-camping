@@ -3,12 +3,11 @@ import tweets from "./tweets_arr.js";
 export default class TweetCollection {
     _tweets;
     _user;
-    // _createdAt;
-    constructor() {
-      this._tweets = tweets;
-      // const user = 'user';
+   
+    constructor(user) {
+      this._tweets = tweets;  
     }
-  
+ 
     addAll(tws) {
       const noValid = [];
       tws.forEach((element) => {
@@ -27,7 +26,7 @@ export default class TweetCollection {
       if (filterConfig) {
         if (filterConfig._author) {
           result = result.filter((tweet) =>
-            tweet._author.toLocaleLowerCase().includes(filterConfig.author.toLocaleLowerCase()),
+            tweet.author.toLocaleLowerCase().includes(filterConfig.author.toLocaleLowerCase()),
           );
         }
         if (filterConfig.dateFrom) {
@@ -47,10 +46,10 @@ export default class TweetCollection {
           result = result.filter((tweet) => tweet.text.includes(filterConfig.text));
         }
         result.sort((a, b) => {
-          if (a._createdAt > b._createdAt) {
+          if (a.createdAt > b.createdAt) {
             return 1;
           }
-          if (a._createdAt < b._createdAt) {
+          if (a.createdAt < b.createdAt) {
             return -1;
           }
           return 0;
@@ -64,12 +63,13 @@ export default class TweetCollection {
   
     _edit(id, text) {
       const tweet = this._get(id);
-      // const user = 'user';
       if (tweet) {
-        if (tweet.author === user && Tweet.validate(tweet)) {
+        if (tweet.author === this._user && Tweet.validate(tweet)) {
+          console.log(`редактирование возможно user = ${this._user}`);
           tweet.text = text;
           return true;
         } else {
+          console.log(`не совпадает имя пользователя user = ${this._user}, редактирование невозможно`);
           return false;
         }
       }
@@ -77,11 +77,11 @@ export default class TweetCollection {
       return false;
     }
   
-    _remove(id) {
+    _remove(id) {      
       const tweet = this._get(id);
-      // const user = 'user';
-      if (tweet.author === user) {
-        tweets.splice(tweet.id, 1);
+      console.log(tweet);
+      if (tweet.author === this._user) {
+        this._tweets.splice(tweet.id - 1, 1);
         return true;
       } else {
         return false;
@@ -94,11 +94,10 @@ export default class TweetCollection {
   
     _add(text) {
       const newTweet = {};
-      const user = 'user';
       newTweet.id = this._genereteId();
       newTweet.text = text;
       newTweet.createdAt = new Date();
-      newTweet.author = user;
+      newTweet.author = this._user;
       newTweet.comments = [];
       if (Tweet.validate(newTweet)) {
         tweets.push(newTweet);
@@ -112,7 +111,6 @@ export default class TweetCollection {
       const commentedTweet = this._get(id);
       if (commentedTweet) {
         const newComment = {};
-        // const user = 'user';
         newComment.id = this._genereteId();
         newComment.text = text;
         newComment.createdAt = new Date();
@@ -124,5 +122,12 @@ export default class TweetCollection {
           return false;
         }
       }
+    }
+
+    get user(){
+      return this._user;
+    }
+    set user(newUser){
+      this._user = newUser;
     }
   }

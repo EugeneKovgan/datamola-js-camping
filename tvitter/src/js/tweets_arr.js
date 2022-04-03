@@ -59,7 +59,7 @@ const tweets = [
     id: '7',
     text: 'Всё хорошо! #js',
     createdAt: new Date('2022-03-09T23:00:20'),
-    author: 'user',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -94,7 +94,7 @@ const tweets = [
     id: '11',
     text: 'Всё хорошо! #datamola',
     createdAt: new Date('2022-03-09T23:00:20'),
-    author: 'Пётр Петров',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -136,7 +136,7 @@ const tweets = [
     id: '16',
     text: 'Приходи в гости #datamola',
     createdAt: new Date('2022-03-10T23:00:25'),
-    author: 'Пётр Петров',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -164,7 +164,7 @@ const tweets = [
     id: '20',
     text: 'Приходи в гости #js',
     createdAt: new Date('2022-03-09T23:00:29'),
-    author: 'Пётр Петров',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -180,12 +180,6 @@ const tweets = [
     createdAt: new Date('2022-03-09T23:00:31'),
     author: 'Пётр Петров',
     comments: [],
-  },
-  {
-    id: '28',
-  },
-  {
-    id: '29',
   },
 ];
 
