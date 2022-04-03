@@ -10,6 +10,8 @@ export default class TweetFeedView  {
         this.newTweet = newTweet;
         console.log(this.newTweet);
         this.newTweet.forEach(element => {
+          // console.log(element.createdAt.slice(5,-8));
+          
         tweets_container.innerHTML += `
         <div class="tweet-container">
         <div class="tweet_header">
@@ -30,7 +32,7 @@ export default class TweetFeedView  {
           <p class="text tweet-text">${element.text}</p>
         </div>
         <div class="tweet-footer">
-          <div class="date-block text"><span>${element.createdAt}/</span></div>
+          <div class="date-block text"><span>${element.createdAt.toLocaleString()}</span></div>
           <div class="comment-counter">
             <span class="comment-counter_number">${element.comments.length}</span>
             <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />

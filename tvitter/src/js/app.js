@@ -16,7 +16,7 @@ let newTweet = new Tweet({
 });
 
 const tweetCollection = new TweetCollection(); // для проверки следующих методов 
-tweetCollection.user = "Gust";
+tweetCollection.user = "Guest";
 
 const currentUser = new HeaderView('avatar_block'); // текущию юзверь
 
@@ -60,11 +60,10 @@ function showTweet(id){
   tweetView.display(newTweet);
 }
 
-
 // ++++++++++++++     tests    ++++++++++++
 // console.log(tweets);
 filterView.display(tweets); // включить фильтр твитов
-setCurrentUser() // установить текущего пользователя 
+setCurrentUser() // установить текущего пользователя (по умолчанию "Guest")
 setCurrentUser('Илон Маск'); // поменяет текущего пользователя
 tweetView.display(newTweet) // нарисовать один твит по заданному шаблону newTweet
 tweetFeedView.display(tweets); // добавить массив твитов
