@@ -1,4 +1,4 @@
-export default class FilterView  {
+export default class FilterView {
     constructor(containerId){
         this.containerId = containerId;
     }
@@ -9,21 +9,28 @@ export default class FilterView  {
         let authorList =[];  
         let hashTagsList =[];          
         this.tweets.forEach(element => {authorList.push(element.author)});
-        authorList = new Set(authorList)
+        authorList = new Set(authorList);
         const filter_name = filter.querySelector('.filter_name');
         authorList.forEach(element => {           
             let option = document.createElement('option');
-            option.innerHTML = element
-            filter_name.append(option)
+            option.innerHTML = element;
+            filter_name.append(option);
         });
-        // this.tweets.forEach(element=>{hashTagsList.push(element.text.substr(`#`))});
-        // hashTagsList = new Set(hashTagsList)
-        // console.log(hashTagsList);
-        // const filter_hastag = filter.querySelector('.filter_hastag');
-        // hashTagsList.forEach(element => {           
-        //     let option = document.createElement('option');
-        //     option.innerHTML = element
-        //     filter_hastag.append(option)
-        // });
+
+       this.tweets.forEach((element)=>{
+            let el = (element.text.split(' '));
+            el.forEach((element)=>{
+                if(element.startsWith('#')) { 
+                    hashTagsList.push(element.toLowerCase());                   
+                };                   
+            });  
+        });
+        hashTagsList = new Set(hashTagsList);
+        const filter_hastag = filter.querySelector('.filter_hastag');
+        hashTagsList.forEach(element => {           
+            let option = document.createElement('option');
+            option.innerHTML = element;
+            filter_hastag.append(option);
+        });
     }
 }

@@ -1,11 +1,10 @@
 export default class TweetView {
     constructor(containerId){      
-        this.containerId = containerId
+        this.containerId = containerId;
     }
     display(newTweet){
         const tweets_container = document.querySelector(`#${this.containerId}`);
         this.newTweet = newTweet;
-        console.log(newTweet);        
         tweets_container.innerHTML += `
       <div class="tweet-container">
         <div class="tweet_header">
@@ -26,7 +25,7 @@ export default class TweetView {
           <p class="text tweet-text">${this.newTweet.text}</p>
         </div>
         <div class="tweet-footer">
-          <div class="date-block text"><span>${this.newTweet.createdAt} /</span></div>
+          <div class="date-block text"><span>${this.newTweet.createdAt}/</span></div>
           <div class="comment-counter">
             <span class="comment-counter_number">${this.newTweet.comments.length}</span>
             <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />

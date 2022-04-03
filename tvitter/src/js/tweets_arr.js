@@ -29,7 +29,7 @@ const tweets = [
   },
   {
     id: '4',
-    text: 'Приходи в гости #js',
+    text: 'Приходи в гости #JS',
     createdAt: new Date('2022-03-09T23:00:22'),
     author: 'snow',
     comments: [],

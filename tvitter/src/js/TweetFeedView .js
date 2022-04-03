@@ -30,7 +30,7 @@ export default class TweetFeedView  {
           <p class="text tweet-text">${element.text}</p>
         </div>
         <div class="tweet-footer">
-          <div class="date-block text"><span>${element.createdAt} /</span></div>
+          <div class="date-block text"><span>${element.createdAt}/</span></div>
           <div class="comment-counter">
             <span class="comment-counter_number">${element.comments.length}</span>
             <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />

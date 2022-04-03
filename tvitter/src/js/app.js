@@ -16,7 +16,7 @@ let newTweet = new Tweet({
 });
 
 const tweetCollection = new TweetCollection(); // для проверки следующих методов 
-tweetCollection.user = "Gust"
+tweetCollection.user = "Gust";
 
 const currentUser = new HeaderView('avatar_block'); // текущию юзверь
 
@@ -30,12 +30,13 @@ const filterView = new FilterView('filter');  // фильтр
 // filterView.display(tweets);
 
 function setCurrentUser(user = tweetCollection.user){  
-  currentUser.display(user)
-  tweetCollection.user = user  
+  currentUser.display(user);
+  tweetCollection.user = user;  
 }
 
 function addTweet(text){
   tweetCollection._add(text);
+  tweetFeedView.display(tweets);
 }
 
 function editTweet(id, text){
@@ -59,8 +60,9 @@ function showTweet(id){
   tweetView.display(newTweet);
 }
 
-// ++++++++++++++     tests    ++++++++++++
 
+// ++++++++++++++     tests    ++++++++++++
+// console.log(tweets);
 filterView.display(tweets); // включить фильтр твитов
 setCurrentUser() // установить текущего пользователя 
 setCurrentUser('Илон Маск'); // поменяет текущего пользователя
@@ -71,5 +73,8 @@ editTweet('7', "lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem l
 removeTweet('7'); // убрать твит из массива твитов
 getFeed(0, 10); // получить твиты по фильтру 
 showTweet('9'); // отобразить один твит 
+addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
 
 // console.log(tweets);
