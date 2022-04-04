@@ -65,7 +65,7 @@ export default class TweetCollection {
       const tweet = this._get(id);
       if (tweet) {
         if (tweet.author === this._user && Tweet.validate(tweet)) {
-          console.log(`редактирование возможно user = ${this._user}`);
+          console.log(`редактирование выполнено user = ${this._user}`);
           tweet.text = text;
           return true;
         } else {
@@ -81,9 +81,11 @@ export default class TweetCollection {
       const tweet = this._get(id);
       console.log(tweet);
       if (tweet.author === this._user) {
+        console.log(`удаление выполнено user = ${this._user}`);
         this._tweets.splice(tweet.id - 1, 1);
         return true;
       } else {
+        console.log(`не совпадает имя пользователя user = ${this._user}, удаление невозможно`);
         return false;
       }
     }
@@ -93,6 +95,9 @@ export default class TweetCollection {
     }
   
     _add(text) {
+      if (this._user == 'Guest') {
+      console.log('гость не может добавлять твиты');  
+      return false} else {
       const newTweet = {};
       newTweet.id = this._genereteId();
       newTweet.text = text;
@@ -104,7 +109,7 @@ export default class TweetCollection {
         return true;
       } else {
         return false;
-      }
+      }}
     }
   
     _addComment(id, text) {

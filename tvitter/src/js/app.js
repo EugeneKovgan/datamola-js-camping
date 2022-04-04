@@ -34,7 +34,7 @@ function setCurrentUser(user = tweetCollection.user){
   tweetCollection.user = user;  
 }
 
-function addTweet(text){
+function addTweet(text){  
   tweetCollection._add(text);
   tweetFeedView.display(tweets);
 }
@@ -60,20 +60,36 @@ function showTweet(id){
   tweetView.display(newTweet);
 }
 
+export function markedHashtags (text){ 
+  let newTextArr = [];
+  text.split(' ').forEach(element => {          
+  // console.log(element);          
+  if (element.startsWith('#')){
+    // console.log(element);
+    element = `<span>${element}</span>`;
+    newTextArr.push(element)
+  } else {    
+    newTextArr.push(element);                 
+  }
+});
+text = newTextArr.join(' ');
+return text
+}
+
 // ++++++++++++++     tests    ++++++++++++
 // console.log(tweets);
 filterView.display(tweets); // включить фильтр твитов
 setCurrentUser() // установить текущего пользователя (по умолчанию "Guest")
 setCurrentUser('Илон Маск'); // поменяет текущего пользователя
-tweetView.display(newTweet) // нарисовать один твит по заданному шаблону newTweet
 tweetFeedView.display(tweets); // добавить массив твитов
-addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
 editTweet('7', "lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore"); // редактировать твит
 removeTweet('7'); // убрать твит из массива твитов
 getFeed(0, 10); // получить твиты по фильтру 
-showTweet('9'); // отобразить один твит 
-addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
-addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
-addTweet('lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+tweetView.display(newTweet) // нарисовать один твит по заданному шаблону newTweet
+showTweet('6'); // отобразить один твит 
+addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
 
 // console.log(tweets);

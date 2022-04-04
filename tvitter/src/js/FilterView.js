@@ -6,6 +6,7 @@ export default class FilterView {
         this.tweets = tweets;
         // console.log(this.tweets);        
         const filter = document.querySelector(`#${this.containerId}`);
+        if(!filter == null) {
         let authorList =[];  
         let hashTagsList =[];          
         this.tweets.forEach(element => {authorList.push(element.author)});
@@ -32,5 +33,5 @@ export default class FilterView {
             option.innerHTML = element;
             filter_hastag.append(option);
         });
-    }
+    }}
 }

@@ -5,6 +5,23 @@ export default class TweetView {
     display(newTweet){
         const tweets_container = document.querySelector(`#${this.containerId}`);
         this.newTweet = newTweet;
+
+    function markedHashtags (text){ 
+        let newTextArr = [];
+          text.split(' ').forEach(element => {     
+        if (element.startsWith('#')){
+            element = `<span>${element}</span>`;
+            newTextArr.push(element)}
+        else {    
+            newTextArr.push(element);                 
+          }
+        });
+        text = newTextArr.join(' ');
+      return text
+    }
+      
+    newTweet.text = markedHashtags (newTweet.text);
+
         tweets_container.innerHTML += `
       <div class="tweet-container">
         <div class="tweet_header">
@@ -13,7 +30,7 @@ export default class TweetView {
               <div class="user_avatar">
                 <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
               </div>
-              <div class="user_name text">${this.newTweet.author} -id${this.newTweet.id}</div>
+              <div class="user_name text">${this.newTweet.author}</div>
             </a>
           </div>
           <div class="header_action-block">
@@ -31,7 +48,38 @@ export default class TweetView {
             <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />
           </div>
         </div>
-      </div>        
+      </div>       
         `
-      }
+        tweets_container.innerHTML += `
+          <div class="new-tweet">
+          <input class="new-tweet_textarea" type="text" placeholder="Text" />
+          <button class="new-tweet_btn btn">Add</button>
+          </div>`
+          if(newTweet.comments.length > 0){      
+            for (let comment of newTweet.comments) {
+              comment.text = markedHashtags (comment.text);
+              tweets_container.innerHTML += 
+              `
+              <div class="comment-container">
+              <div class="comment_header">
+                <div class="comment_user_info-block">
+                  <a class="avatar-block" href="">
+                    <div class="user_avatar">
+                      <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
+                    </div>
+                    <div class="user_name text">${comment.author}</div>
+                  </a>
+                </div>
+              </div>
+              <div class="comment-content">
+                <p class="text comment-text">${comment.text}</p>
+              </div>
+              <div class="tweet-footer">
+                <div class="date-block text">${comment.createdAt.toLocaleString()}</span></div>
+              </div>
+            </div>
+              `                            
+            }
+          }
+        }    
 }

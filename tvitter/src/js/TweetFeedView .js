@@ -1,5 +1,3 @@
-// import TweetView from "./TweetView";
-// const tweetView = new TweetView('tweets_container')
 export default class TweetFeedView  {
     constructor(containerId){
         this.containerId = containerId
@@ -9,9 +7,23 @@ export default class TweetFeedView  {
         tweets_container.innerHTML ='';
         this.newTweet = newTweet;
         console.log(this.newTweet);
+        function markedHashtags (text){ 
+          let newTextArr = [];
+          // console.log(text)
+            text.split(' ').forEach(element => {     
+          if (element.startsWith('#')){
+              element = `<span>${element}</span>`;
+              newTextArr.push(element)}
+          else {    
+              newTextArr.push(element);                 
+            }
+          });
+          text = newTextArr.join(' ');
+        return text
+      }   
+
         this.newTweet.forEach(element => {
-          // console.log(element.createdAt.slice(5,-8));
-          
+          element.text = markedHashtags(element.text)
         tweets_container.innerHTML += `
         <div class="tweet-container">
         <div class="tweet_header">
@@ -20,7 +32,7 @@ export default class TweetFeedView  {
               <div class="user_avatar">
                 <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
               </div>
-              <div class="user_name text">${element.author} -id${element.id}</div>
+              <div class="user_name text">${element.author}</div>
             </a>
           </div>
           <div class="header_action-block">
@@ -40,5 +52,5 @@ export default class TweetFeedView  {
         </div>
       </div>        
         `
-     })}
+    })}
 }

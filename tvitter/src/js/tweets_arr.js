@@ -43,15 +43,21 @@ const tweets = [
   },
   {
     id: '6',
-    text: 'Какие дела?',
+    text: 'Какие дела? #datamola',
     createdAt: new Date('2022-03-09T23:00:01'),
     author: 'Петров Петр',
     comments: [
       {
         id: '601',
-        text: 'Хорошо, а у тебя?',
+        text: 'Хорошо, а у тебя? #datamola',
         createdAt: new Date('2022-03-09T23:00:05'),
         author: 'Иванов Иван',
+      },
+      {
+        id: '602',
+        text: 'А у меня ещё лучше! #js',
+        createdAt: new Date('2022-03-09T23:01:05'),
+        author: 'Илон Маск',
       },
     ],
   },

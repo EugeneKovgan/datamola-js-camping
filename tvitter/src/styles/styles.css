@@ -252,17 +252,25 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
+
+.date-block{
+margin-right: 15px;
+}
+
 .comment-counter {
   display: flex;
 }
 .comment-counter_number {
-  font-size: 16px;
-  margin-right: 5px;
-  margin-top: 2px;
+  font-size: 14px;
+  /* margin-right: 5px; */
+  /* margin-top: 2px; */
+  position: absolute;
+  padding-left: 14px;
+  padding-top: 7px;
 }
 .filter {
-  min-width: 290px;
-  height: 250px;
+  min-width: 300px;
+  height: 240px;
   background: rgba(239, 234, 225, 0.2);
   border: 1px solid #efeae1;
   box-sizing: border-box;
@@ -289,8 +297,8 @@ h1 {
   border: 1px solid rgba(116, 116, 116, 0.5);
   box-sizing: border-box;
   border-radius: 20px;
-  width: 90%;
-  bottom: 20px;
+  width: 93%;
+  bottom: 10px;
   font-size: 1.25rem;
   line-height: 21px;
   padding: 12px;
@@ -372,13 +380,19 @@ input:checked + .slider:before {
 .filter_date,
 .filter_text,
 .filter_hastag {
-  width: 105px;
+  width: 135px;
   height: 25px;
   background: #ffffff;
   border: 1px solid #d3f0e1;
   box-sizing: border-box;
   border-radius: 3px;
   cursor: pointer;
+}
+.filter_date{
+  position: relative;
+  /* padding-left: 50px; */
+  /* padding-right: -50px!important;
+  width: 125px; */
 }
 
 .main {
@@ -441,6 +455,7 @@ input:checked + .slider:before {
 .btn:active {
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .tweet-text span,
 .comment-text span {
   background-color: #d197f0;
