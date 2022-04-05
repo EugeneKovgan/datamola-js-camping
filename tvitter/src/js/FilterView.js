@@ -4,9 +4,11 @@ export default class FilterView {
     }
     display(tweets){
         this.tweets = tweets;
-        // console.log(this.tweets);        
-        const filter = document.querySelector(`#${this.containerId}`);
-        if(!filter == null) {
+        const filter = document.querySelector(`#${this.containerId}`);        
+        if(filter == null) {
+        console.log('фильтр отсутствует на странице');            
+        return false;
+        } else {
         let authorList =[];  
         let hashTagsList =[];          
         this.tweets.forEach(element => {authorList.push(element.author)});
@@ -18,9 +20,10 @@ export default class FilterView {
             filter_name.append(option);
         });
 
-       this.tweets.forEach((element)=>{
-            let el = (element.text.split(' '));
-            el.forEach((element)=>{
+        this.tweets.forEach((element)=>{          
+            let el = (element.text.split(' '));            
+                el.forEach((element)=>{
+                element = element.replace('<span>','').replace('</span>','');                
                 if(element.startsWith('#')) { 
                     hashTagsList.push(element.toLowerCase());                   
                 };                   

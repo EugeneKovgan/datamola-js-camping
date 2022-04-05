@@ -3,8 +3,15 @@ export default class TweetView {
         this.containerId = containerId;
     }
     display(newTweet){
-        const tweets_container = document.querySelector(`#${this.containerId}`);
+        const main_pager = document.querySelector(`#${this.containerId}`);        
         this.newTweet = newTweet;
+        main_pager.innerHTML = `
+        <button class="go-back_btn btn">Go back</button>
+        <div class="main_content">
+        <div class="tweets-container" id="tweets_container">
+        </div>
+        </div>     
+        `;
 
     function markedHashtags (text){ 
         let newTextArr = [];

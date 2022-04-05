@@ -20,14 +20,14 @@ tweetCollection.user = "Guest";
 
 const currentUser = new HeaderView('avatar_block'); // текущию юзверь
 
-const tweetView = new TweetView('tweets_container'); // нарисовать один твит 
+const tweetView = new TweetView('main_page'); // нарисовать один твит 
 // tweetView.display(newTweet)
-
-const tweetFeedView  = new TweetFeedView('tweets_container'); // отобразить массви твитов
-// tweetFeedView.display(tweets);
 
 const filterView = new FilterView('filter');  // фильтр
 // filterView.display(tweets);
+
+const tweetFeedView  = new TweetFeedView('main_page'); // отобразить массви твитов
+// tweetFeedView.display(tweets);
 
 function setCurrentUser(user = tweetCollection.user){  
   currentUser.display(user);
@@ -37,22 +37,25 @@ function setCurrentUser(user = tweetCollection.user){
 function addTweet(text){  
   tweetCollection._add(text);
   tweetFeedView.display(tweets);
+  filterView.display(tweets);
 }
 
 function editTweet(id, text){
   tweetCollection._edit(id, text);
   tweetFeedView.display(tweets);
+  filterView.display(tweets);
 }
 
 function removeTweet(id){
   tweetCollection._remove(id);
   tweetFeedView.display(tweets);
+  filterView.display(tweets)
 }
 
 function getFeed(skip, top, filterConfig){
   const tweets = tweetCollection.getPage(skip = 0, top = 10, filterConfig = {});  
   tweetFeedView.display(tweets);
-
+  filterView.display(tweets);
 }
 
 function showTweet(id){
@@ -62,10 +65,8 @@ function showTweet(id){
 
 export function markedHashtags (text){ 
   let newTextArr = [];
-  text.split(' ').forEach(element => {          
-  // console.log(element);          
+  text.split(' ').forEach(element => { 
   if (element.startsWith('#')){
-    // console.log(element);
     element = `<span>${element}</span>`;
     newTextArr.push(element)
   } else {    
@@ -78,18 +79,20 @@ return text
 
 // ++++++++++++++     tests    ++++++++++++
 // console.log(tweets);
-filterView.display(tweets); // включить фильтр твитов
+// console.log(tweetCollection.getPage(0, 10)); // должен отсортировать твиты по дате создания и вернуть первые 10 твитов.
 setCurrentUser() // установить текущего пользователя (по умолчанию "Guest")
-setCurrentUser('Илон Маск'); // поменяет текущего пользователя
+setCurrentUser('Илон Маск'); // назначить текущего пользователя
 tweetFeedView.display(tweets); // добавить массив твитов
+filterView.display(tweets); // включить фильтр твитов 
 addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
-editTweet('7', "lorem lorem lorem <span> #lorem</span> lorem lorem lorem lorem lorem lorem lore"); // редактировать твит
+editTweet('7', "lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore"); // редактировать твит
 removeTweet('7'); // убрать твит из массива твитов
 getFeed(0, 10); // получить твиты по фильтру 
 tweetView.display(newTweet) // нарисовать один твит по заданному шаблону newTweet
 showTweet('6'); // отобразить один твит 
 addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
-addTweet('lorem lorem lorem #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
-addTweet('lorem lorem lorem #lorem</span> lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem #lorem #hashtag lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore'); // добавить твит в массив твитов
+console.log(tweetCollection.getPage(0, 10, { text: '#js' })); // отсортировать твиты с #js
 
 // console.log(tweets);
