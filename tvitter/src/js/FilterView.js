@@ -35,6 +35,20 @@ export default class FilterView {
             let option = document.createElement('option');
             option.innerHTML = element;
             filter_hastag.append(option);
-        });
-    }}
-}
+        });        
+
+        function filterController(){
+            const filter = document.querySelector('#filter');
+            filter.addEventListener('click',(e)=>{
+                e.preventDefault();
+                console.log(e.target);
+                if(e.target == "svg_btn_up"){
+                    console.log("svg-btn")
+                }
+            })                
+        } 
+        
+        
+        }}
+        
+    }
