@@ -1,4 +1,4 @@
-export const tweetsArr = [
+const tweets = [
   {
     id: '1',
     text: 'Привет! #js #datamola',
@@ -29,7 +29,7 @@ export const tweetsArr = [
   },
   {
     id: '4',
-    text: 'Приходи в гости #js',
+    text: 'Приходи в гости #JS',
     createdAt: new Date('2022-03-09T23:00:22'),
     author: 'snow',
     comments: [],
@@ -43,15 +43,21 @@ export const tweetsArr = [
   },
   {
     id: '6',
-    text: 'Какие дела?',
+    text: 'Какие дела? #datamola',
     createdAt: new Date('2022-03-09T23:00:01'),
     author: 'Петров Петр',
     comments: [
       {
         id: '601',
-        text: 'Хорошо, а у тебя?',
+        text: 'Хорошо, а у тебя? #datamola',
         createdAt: new Date('2022-03-09T23:00:05'),
         author: 'Иванов Иван',
+      },
+      {
+        id: '602',
+        text: 'А у меня ещё лучше! #js',
+        createdAt: new Date('2022-03-09T23:01:05'),
+        author: 'Илон Маск',
       },
     ],
   },
@@ -59,7 +65,7 @@ export const tweetsArr = [
     id: '7',
     text: 'Всё хорошо! #js',
     createdAt: new Date('2022-03-09T23:00:20'),
-    author: 'user',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -94,7 +100,7 @@ export const tweetsArr = [
     id: '11',
     text: 'Всё хорошо! #datamola',
     createdAt: new Date('2022-03-09T23:00:20'),
-    author: 'Пётр Петров',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -136,7 +142,7 @@ export const tweetsArr = [
     id: '16',
     text: 'Приходи в гости #datamola',
     createdAt: new Date('2022-03-10T23:00:25'),
-    author: 'Пётр Петров',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -164,7 +170,7 @@ export const tweetsArr = [
     id: '20',
     text: 'Приходи в гости #js',
     createdAt: new Date('2022-03-09T23:00:29'),
-    author: 'Пётр Петров',
+    author: 'Илон Маск',
     comments: [],
   },
   {
@@ -183,4 +189,4 @@ export const tweetsArr = [
   },
 ];
 
-// export default tweets;
+export default tweets;

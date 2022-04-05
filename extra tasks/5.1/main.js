@@ -51,3 +51,4 @@ function getDay(date) {
 }
 
 createCalendar(calendar, 2022, 3);
+createCalendar(calendar, 2022, 5);

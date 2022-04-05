@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thyme</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
   </head>
 
   <body>
@@ -15,8 +15,8 @@
           <a href=""><img src="./assets/logo.svg" alt="logo" /></a>
         </div>
         <div class="header_user_info-block">
-          <a class="avatar-block" href="">
-            <div class="user_name text" id="user_name">My Name</div>
+          <a class="avatar-block" id="avatar_block" href="">
+            <div class="user_name text">Sign in</div>
             <div class="user_avatar">
               <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
             </div>
@@ -30,51 +30,21 @@
         </div>
       </header>
 
-      <main class="main container">
-        <div class="main_content">
+      <main class="main container" id="main_page">
+        
+        <!-- <div class="main_content">
           <div class="new-tweet">
             <input class="new-tweet_textarea" type="text" placeholder="Text" />
             <button class="new-tweet_btn btn">Add</button>
           </div>
 
-          <div class="tweet-container">
-            <div class="tweet_header">
-              <div class="tweet_user_info-block">
-                <a class="avatar-block" href="">
-                  <div class="user_avatar">
-                    <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
-                  </div>
-                  <div class="user_name text">My Name 1</div>
-                </a>
-              </div>
-              <div class="header_action-block">
-                <img class="svg-btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
-                <img class="svg-btn" src="./assets/bx_message-rounded-x.svg" alt="" />
-              </div>
-            </div>
-            <div class="tweet-content">
-              <p class="text tweet-text">
-                lorem lorem lorem<span class="kkk"> #lorem</span> lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-                lorem lorem lorem lorem lorem lorem lorem lorem
-              </p>
-            </div>
-            <div class="tweet-footer">
-              <div class="date-block text">16.01.2022 <span> / 15-20</span></div>
-              <div class="comment-counter">
-                <span class="comment-counter_number">5</span>
-                <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />
-              </div>
-            </div>
+          <div class="tweets-container" id="tweets_container">         
           </div>
 
           <button class="load-more_btn btn">Load more</button>
-        </div>
+        </div> -->
 
-        <div class="filter">
+        <!-- <div class="filter" id="filter">
           <div class="filter_header">
             <div class="filter_header-name">Filter</div>
             <img class="svg-btn" src="./assets/carbon_chevron-sort-up.svg" alt="up" />
@@ -86,8 +56,6 @@
                   <span class="slider round"></span>
                 </label>
                 <select class="filter_name" name="" id="">
-                  <option value="">Name_1</option>
-                  <option value="">Name_2</option>
                 </select>
               </div>
 
@@ -117,13 +85,11 @@
                   <span class="slider round"></span>
                 </label>
                 <select class="filter_hastag" name="" id="">
-                  <option value=""># trololo</option>
-                  <option value=""># tralala</option>
                 </select>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </main>
 
       <footer class="footer container">
@@ -138,6 +104,6 @@
         </div>
       </footer>
     </div>
-    <script src="./app.js"></script>
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>
