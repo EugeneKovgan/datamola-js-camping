@@ -1,6 +1,6 @@
-export default class TweetFeedView  {
+export default class TweetFeedView {
     constructor(containerId){
-        this.containerId = containerId
+        this.containerId = containerId;
     }
     display(tweets){
         const main_page = document.querySelector(`#${this.containerId}`);
@@ -80,18 +80,18 @@ export default class TweetFeedView  {
         return text
       }   
 
-        this.tweets.forEach(element => {
+        this.tweets.forEach(element => {     
           element.text = markedHashtags(element.text)
         tweets_container.innerHTML += `
         <div class="tweet-container">
         <div class="tweet_header">
           <div class="tweet_user_info-block">
-            <a class="avatar-block" href="">
+            <div class="avatar-block" href="">
               <div class="user_avatar">
                 <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
               </div>
               <div class="user_name text">${element.author}</div>
-            </a>
+            </div>
           </div>
           <div class="header_action-block">
             <img class="svg-btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
@@ -110,5 +110,10 @@ export default class TweetFeedView  {
         </div>
       </div>        
         `
+      
     })}
+
+  
+
+
 }

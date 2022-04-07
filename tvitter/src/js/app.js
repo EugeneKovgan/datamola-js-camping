@@ -13,56 +13,104 @@ class TweetsController {
         this.tweetView = new TweetView('main_page'); // нарисовать один твит
         this.filterView = new FilterView('filter');  // фильтр 
         this.tweetFeedView  = new TweetFeedView('main_page'); // отобразить массви твитов
-    }
-
-    setCurrentUser(user = tweetCollection.user){  
+    };
+    setCurrentUser(user = this.tweetCollection.user){  
         this.currentUser.display(user);
         this.tweetCollection.user = user;  
-    }
+    };
     addTweet(text){  
         this.tweetCollection._add(text);
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets);
-    }
-    addTweet(text){  
-        this.tweetCollection._add(text);
-        this.tweetFeedView.display(tweets);
-        this.filterView.display(tweets);
-    }
+    };
+    // addTweet(text){  
+    //     this.tweetCollection._add(text);
+    //     this.tweetFeedView.display(tweets);
+    //     this.filterView.display(tweets);
+    // };
     editTweet(id, text){
         this.tweetCollection._edit(id, text);
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets);
-    }
+    };
     removeTweet(id){
         this.tweetCollection._remove(id);
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets)
-    }
+    };
     getFeed(skip, top, filterConfig){
         this.tweets = tweetCollection.getPage(skip = 0, top = 10, filterConfig = {});  
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets);
     }
     showTweet(id){
-        this.newTweet = this.tweetCollection._get(id);
+        const newTweet = this.tweetCollection._get(id);
         this.tweetView.display(newTweet);
-    }
+    };
 
     getStartedTweetsLIst(tweets){
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets);
         // this.tweetCollection.getPage(0, 10)
-    }
-    startTweetter(){
-        console.log('tweetter запущен');
-        this.getStartedTweetsLIst(this.tweetCollection.getPage(0, 5));
-    }
-}
+    };
+
+    listenerCurrentUser(){
+        this.setCurrentUser(); // установить текущего пользователя (по умолчанию "Guest")  
+        const modal = document.querySelector('#modal');
+        const registrationLoginInput = document.querySelector('.registration-login-input');
+        const loginBtn = modal.querySelector('.login_btn');
+        const registrationBtn = modal.querySelector('.registration_btn');
+        const close = modal.querySelector('.registration-form-close');
+        const user = document.querySelector('.user_name ');
+
+        close.addEventListener('click',() => modal.style.display = 'none') 
+        user.addEventListener('click', (e)=> {
+        e.preventDefault();
+        console.log(this.tweetCollection.user);              
+        if (this.tweetCollection.user =='Guest'){            
+            modal.style.display = 'block';
+            registrationBtn.addEventListener('click',()=> {
+                if(registrationLoginInput.value !=''){
+                    let newUser = registrationLoginInput.value;
+                    this.setCurrentUser(newUser);
+                    modal.style.display = 'none';
+                    this.listenerAddNewTweet();                  
+                    };                
+                }
+            )} 
+            else
+            {          
+                console.log('not guest')}
+        }
+    )};
+
+    listenerAddNewTweet(){
+        const tweet = document.querySelector('.new-tweet');
+        const newTweet = tweet.querySelector('.new-tweet_textarea');
+        const addTweetBtn = tweet.querySelector('.new-tweet_btn');
+        addTweetBtn.addEventListener('click', ()=>{
+            if(newTweet.value != '') {           
+                this.addTweet(newTweet.value);
+                newTweet.value = '';
+                this.listenerAddNewTweet();
+            };       
+        });
+    }    
+
+    startTweetter(){      
+        console.log('tweetter запущен');  
+        this.showTweet('6');      
+        // this.getStartedTweetsLIst(this.tweetCollection.getPage(0, 3));
+        this.listenerCurrentUser();
+        this.listenerAddNewTweet();
+    };
+};
 
 const tweetsController = new TweetsController();
 tweetsController.startTweetter();
+// tweetsController.addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore');
 
+// tweetsController.setCurrentUser();
 
 // ++++++++++++++     tests    ++++++++++++
 // console.log(tweets);

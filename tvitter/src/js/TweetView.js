@@ -33,12 +33,12 @@ export default class TweetView {
       <div class="tweet-container">
         <div class="tweet_header">
           <div class="tweet_user_info-block">
-            <a class="avatar-block" href="">
+            <div class="avatar-block" href="">
               <div class="user_avatar">
                 <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
               </div>
               <div class="user_name text">${this.newTweet.author}</div>
-            </a>
+            </div>
           </div>
           <div class="header_action-block">
             <img class="svg-btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />

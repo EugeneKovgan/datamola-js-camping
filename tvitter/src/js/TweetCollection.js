@@ -2,7 +2,7 @@ import Tweet from "./Tweet.js";
 import tweets from "./tweets_arr.js";
 export default class TweetCollection {
     _tweets;
-    _user;
+    _user = "Guest";
    
     constructor(user) {
       this._tweets = tweets;
