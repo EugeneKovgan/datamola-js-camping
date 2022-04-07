@@ -9,5 +9,5 @@ export default class HeaderView {
         console.log(`текущий пользователь ${this.name}`);
         if(this.name != "Guest"){ 
         userName.innerHTML= this.name; }   
-        }
+    }
 }

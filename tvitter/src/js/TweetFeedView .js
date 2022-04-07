@@ -1,8 +1,13 @@
+import TweetView from "./TweetView.js";
+import TweetCollection from "./TweetCollection.js";
 export default class TweetFeedView {
     constructor(containerId){
         this.containerId = containerId;
+        this.tweetCollection = new TweetCollection();
+        this.tweetView = new TweetView();
     }
     display(tweets){
+      this.tweets = tweets;
         const main_page = document.querySelector(`#${this.containerId}`);
         main_page.innerHTML= `
         <div class="main_content">
@@ -63,25 +68,10 @@ export default class TweetFeedView {
           </div>
         </div>
       </div>        
-        `
-        this.tweets = tweets;
-        console.log(this.tweets);
-        function markedHashtags (text){ 
-          let newTextArr = [];
-            text.split(' ').forEach(element => {     
-          if (element.startsWith('#')){
-              element = `<span>${element}</span>`;
-              newTextArr.push(element)}
-          else {    
-              newTextArr.push(element);                 
-            }
-          });
-          text = newTextArr.join(' ');
-        return text
-      }   
-
+        `     
+        const tweets_container = document.querySelector('.tweets-container');
         this.tweets.forEach(element => {     
-          element.text = markedHashtags(element.text)
+        element.text = this.tweetView.markedHashtags(element.text)
         tweets_container.innerHTML += `
         <div class="tweet-container">
         <div class="tweet_header">
@@ -108,12 +98,13 @@ export default class TweetFeedView {
             <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />
           </div>
         </div>
-      </div>        
-        `
-      
-    })}
-
-  
-
-
+      </div>       
+        `     
+   
+        console.log(this.tweetCollection.user);
+        console.log(element.author);
+        this.tweetView.showHeaderActionBlock(element.author, this.tweetCollection.user);
+      }
+      )
+  }
 }

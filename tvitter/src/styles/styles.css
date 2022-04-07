@@ -561,10 +561,10 @@ cursor: pointer;
   html {
     font-size: 14px;
   }
-  .body {
+  /* .body { */
     /* padding-left: 5px;
     padding-right: 5px; */
-  }
+  /* } */
   .main {
     display: flex;
     align-items: flex-end;

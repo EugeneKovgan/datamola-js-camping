@@ -23,11 +23,6 @@ class TweetsController {
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets);
     };
-    // addTweet(text){  
-    //     this.tweetCollection._add(text);
-    //     this.tweetFeedView.display(tweets);
-    //     this.filterView.display(tweets);
-    // };
     editTweet(id, text){
         this.tweetCollection._edit(id, text);
         this.tweetFeedView.display(tweets);
@@ -47,7 +42,6 @@ class TweetsController {
         const newTweet = this.tweetCollection._get(id);
         this.tweetView.display(newTweet);
     };
-
     getStartedTweetsLIst(tweets){
         this.tweetFeedView.display(tweets);
         this.filterView.display(tweets);
@@ -74,13 +68,11 @@ class TweetsController {
                     let newUser = registrationLoginInput.value;
                     this.setCurrentUser(newUser);
                     modal.style.display = 'none';
-                    this.listenerAddNewTweet();                  
+                    this.listenerAddNewTweet();              
                     };                
                 }
-            )} 
-            else
-            {          
-                console.log('not guest')}
+            )} else {          
+            console.log('not guest')}
         }
     )};
 
@@ -88,7 +80,7 @@ class TweetsController {
         const tweet = document.querySelector('.new-tweet');
         const newTweet = tweet.querySelector('.new-tweet_textarea');
         const addTweetBtn = tweet.querySelector('.new-tweet_btn');
-        addTweetBtn.addEventListener('click', ()=>{
+        addTweetBtn.addEventListener('click', ()=> {
             if(newTweet.value != '') {           
                 this.addTweet(newTweet.value);
                 newTweet.value = '';
@@ -99,8 +91,8 @@ class TweetsController {
 
     startTweetter(){      
         console.log('tweetter запущен');  
-        this.showTweet('6');      
-        // this.getStartedTweetsLIst(this.tweetCollection.getPage(0, 3));
+        // this.showTweet('2');      
+        this.getStartedTweetsLIst(this.tweetCollection.getPage(0, 8));
         this.listenerCurrentUser();
         this.listenerAddNewTweet();
     };

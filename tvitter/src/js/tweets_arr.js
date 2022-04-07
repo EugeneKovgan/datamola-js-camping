@@ -10,7 +10,7 @@ const tweets = [
     id: '2',
     text: 'Какие дела?',
     createdAt: new Date('2022-03-07T23:00:01'),
-    author: 'Петров Петр',
+    author: 'Guest',
     comments: [
       {
         id: '201',
@@ -45,7 +45,7 @@ const tweets = [
     id: '6',
     text: 'Какие дела? #datamola',
     createdAt: new Date('2022-03-09T23:00:01'),
-    author: 'Петров Петр',
+    author: 'Guest',
     comments: [
       {
         id: '601',
@@ -86,7 +86,7 @@ const tweets = [
     id: '10',
     text: 'Какие дела?',
     createdAt: new Date('2022-03-09T23:00:01'),
-    author: 'Петров Петр',
+    author: 'Guest',
     comments: [
       {
         id: '1001',
