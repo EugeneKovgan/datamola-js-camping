@@ -1,87 +1,68 @@
-// import tweets from './tweets_arr.js';
-// import Tweet from "./Tweet.js"
-// import Comment from "./Comment.js"
-// import TweetCollection from './TweetCollection.js';
-// import HeaderView from './HeaderView.js';
-// import TweetView from './TweetView.js';
-// import TweetFeedView from "./TweetFeedView .js";
-// import FilterView from "./FilterView.js";
-import TweetsController from "./TweetsController.js";
+import tweets from './tweets_arr.js';
+import Tweet from "./Tweet.js"
+import Comment from "./Comment.js"
+import TweetCollection from './TweetCollection.js';
+import HeaderView from './HeaderView.js';
+import TweetView from './TweetView.js';
+import TweetFeedView from "./TweetFeedView .js";
+import FilterView from "./FilterView.js";
+class TweetsController {
+    constructor(){
+        this.tweetCollection = new TweetCollection(); // для проверки следующих методов 
+        this.currentUser = new HeaderView('avatar_block'); // текущию юзверь
+        this.tweetView = new TweetView('main_page'); // нарисовать один твит
+        this.filterView = new FilterView('filter');  // фильтр 
+        this.tweetFeedView  = new TweetFeedView('main_page'); // отобразить массви твитов
+    }
+
+    setCurrentUser(user = tweetCollection.user){  
+        this.currentUser.display(user);
+        this.tweetCollection.user = user;  
+    }
+    addTweet(text){  
+        this.tweetCollection._add(text);
+        this.tweetFeedView.display(tweets);
+        this.filterView.display(tweets);
+    }
+    addTweet(text){  
+        this.tweetCollection._add(text);
+        this.tweetFeedView.display(tweets);
+        this.filterView.display(tweets);
+    }
+    editTweet(id, text){
+        this.tweetCollection._edit(id, text);
+        this.tweetFeedView.display(tweets);
+        this.filterView.display(tweets);
+    }
+    removeTweet(id){
+        this.tweetCollection._remove(id);
+        this.tweetFeedView.display(tweets);
+        this.filterView.display(tweets)
+    }
+    getFeed(skip, top, filterConfig){
+        this.tweets = tweetCollection.getPage(skip = 0, top = 10, filterConfig = {});  
+        this.tweetFeedView.display(tweets);
+        this.filterView.display(tweets);
+    }
+    showTweet(id){
+        this.newTweet = this.tweetCollection._get(id);
+        this.tweetView.display(newTweet);
+    }
+
+    getStartedTweetsLIst(tweets){
+        this.tweetFeedView.display(tweets);
+        this.filterView.display(tweets);
+        // this.tweetCollection.getPage(0, 10)
+    }
+    startTweetter(){
+        console.log('tweetter запущен');
+        this.getStartedTweetsLIst(this.tweetCollection.getPage(0, 5));
+    }
+}
+
 const tweetsController = new TweetsController();
-// console.log(tweetsController);
+tweetsController.startTweetter();
 
-
-// const tweetCollection = new TweetCollection();
-
-// let newTweet = new Tweet({  
-//   id: '1',
-//   text: 'Привет! #js #datamola',
-//   createdAt: new Date('2022-03-09T23:00:00'),
-//   author: 'Иванов Иван',
-//   comments: [],
-// });
-
-// const tweetCollection = new TweetCollection(); // для проверки следующих методов 
-// tweetCollection.user = "Guest";
-
-// const currentUser = new HeaderView('avatar_block'); // текущию юзверь
-
-// const tweetView = new TweetView('main_page'); // нарисовать один твит 
-// // tweetView.display(newTweet)
-
-// const filterView = new FilterView('filter');  // фильтр
-// // filterView.display(tweets);
-
-// const tweetFeedView  = new TweetFeedView('main_page'); // отобразить массви твитов
-// // tweetFeedView.display(tweets);
-
-// function setCurrentUser(user = tweetCollection.user){  
-//   currentUser.display(user);
-//   tweetCollection.user = user;  
-// }
-
-// function addTweet(text){  
-//   tweetCollection._add(text);
-//   tweetFeedView.display(tweets);
-//   filterView.display(tweets);
-// }
-
-// function editTweet(id, text){
-//   tweetCollection._edit(id, text);
-//   tweetFeedView.display(tweets);
-//   filterView.display(tweets);
-// }
-
-// function removeTweet(id){
-//   tweetCollection._remove(id);
-//   tweetFeedView.display(tweets);
-//   filterView.display(tweets)
-// }
-
-// function getFeed(skip, top, filterConfig){
-//   const tweets = tweetCollection.getPage(skip = 0, top = 10, filterConfig = {});  
-//   tweetFeedView.display(tweets);
-//   filterView.display(tweets);
-// }
-
-// function showTweet(id){
-//   const newTweet = tweetCollection._get(id);
-//   tweetView.display(newTweet);
-// }
-
-// export function markedHashtags (text){ 
-//   let newTextArr = [];
-//   text.split(' ').forEach(element => { 
-//   if (element.startsWith('#')){
-//     element = `<span>${element}</span>`;
-//     newTextArr.push(element)
-//   } else {    
-//     newTextArr.push(element);                 
-//   }
-// });
-// text = newTextArr.join(' ');
-// return text
-// }
 
 // ++++++++++++++     tests    ++++++++++++
 // console.log(tweets);

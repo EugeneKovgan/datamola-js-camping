@@ -37,18 +37,15 @@ export default class FilterView {
             filter_hastag.append(option);
         });        
 
-        function filterController(){
+        function filterControllerListener(){
             const filter = document.querySelector('#filter');
             filter.addEventListener('click',(e)=>{
-                e.preventDefault();
-                console.log(e.target);
-                if(e.target == "svg_btn_up"){
-                    console.log("svg-btn")
-                }
+                console.log(e.target)
+                if(e.target.classList == 'svg-btn') { 
+                filter.classList.toggle ('hidden');
+                }       
             })                
-        } 
-        
-        
-        }}
-        
-    }
+        }
+        filterControllerListener();        
+    }}        
+}
