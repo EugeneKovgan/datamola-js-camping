@@ -1,15 +1,16 @@
-import TweetView from "./TweetView.js";
-import TweetCollection from "./TweetCollection.js";
+import TweetView from './TweetView.js';
+import TweetCollection from './TweetCollection.js';
 export default class TweetFeedView {
-    constructor(containerId){
-        this.containerId = containerId;
-        this.tweetCollection = new TweetCollection();
-        this.tweetView = new TweetView();
-    }
-    display(tweets){
-      this.tweets = tweets;
-        const main_page = document.querySelector(`#${this.containerId}`);
-        main_page.innerHTML= `
+  constructor(containerId) {
+    this.containerId = containerId;
+    this.tweetCollection = new TweetCollection();
+    this.tweetView = new TweetView();
+  }
+  display(tweets) {
+    this.tweets = tweets;
+    console.log(this.tweets);
+    const main_page = document.querySelector(`#${this.containerId}`);
+    main_page.innerHTML = `
         <div class="main_content">
         <div class="new-tweet">
           <input class="new-tweet_textarea" type="text" placeholder="Text" />
@@ -68,12 +69,12 @@ export default class TweetFeedView {
           </div>
         </div>
       </div>        
-        `     
-        const tweets_container = document.querySelector('.tweets-container');
-        this.tweets.forEach(element => {     
-        element.text = this.tweetView.markedHashtags(element.text)
-        tweets_container.innerHTML += `
-        <div class="tweet-container">
+        `;
+    const tweets_container = document.querySelector('.tweets-container');
+    this.tweets.forEach((element) => {
+      element.text = this.tweetView.markedHashtags(element.text);
+      tweets_container.innerHTML += `
+        <div class="tweet-container" id="${element.id}">
         <div class="tweet_header">
           <div class="tweet_user_info-block">
             <div class="avatar-block" href="">
@@ -99,12 +100,10 @@ export default class TweetFeedView {
           </div>
         </div>
       </div>       
-        `     
-   
-        console.log(this.tweetCollection.user);
-        console.log(element.author);
-        this.tweetView.showHeaderActionBlock(element.author, this.tweetCollection.user);
-      }
-      )
+        `;
+      // console.log(this.tweetCollection.user);
+      // console.log(element.author);
+      // this.tweetView.showHeaderActionBlock(element.author, this.tweetCollection.user);
+    });
   }
 }
