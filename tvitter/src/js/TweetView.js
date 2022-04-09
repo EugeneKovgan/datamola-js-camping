@@ -18,14 +18,16 @@ export default class TweetView {
     return text;
   }
 
-  showHeaderActionBlock(user, author) {
-    const headerActionBlock = document.querySelector('.header_action-block');
+  showHeaderActionBlock(user, author, headerActionBlockId) {
+    console.log(headerActionBlockId)
     if (user !== author) {
       console.log(`${user} !=  ${author}`);
-      headerActionBlock.style.display = 'none';
     } else {
       console.log(`${user} =  ${author}`);
-      headerActionBlock.style.display = 'block';
+      headerActionBlockId.innerHTML = `
+      <img class="svg-btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
+      <img class="svg-btn" src="./assets/bx_message-rounded-x.svg" alt="delelte" />
+      `;
     }
   }
 
@@ -56,8 +58,7 @@ export default class TweetView {
             </div>
           </div>
           <div class="header_action-block">
-            <img class="svg-btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
-            <img class="svg-btn" src="./assets/bx_message-rounded-x.svg" alt="delelte" />
+
           </div>
         </div>
         <div class="tweet-content">
@@ -70,9 +71,10 @@ export default class TweetView {
             <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />
           </div>
         </div>
-      </div> 
-            
-        `;
+      </div>     
+
+      `;
+      
     tweets_container.innerHTML += `
           <div class="new-tweet">
           <input class="new-tweet_textarea" type="text" placeholder="Text" />
@@ -85,12 +87,12 @@ export default class TweetView {
               <div class="comment-container">
               <div class="comment_header">
                 <div class="comment_user_info-block">
-                  <a class="avatar-block" href="">
+                  <div class="avatar-block">
                     <div class="user_avatar">
                       <img class="svg" src="./assets/user-avatar.svg" alt="user-avatar" />
                     </div>
                     <div class="user_name text">${comment.author}</div>
-                  </a>
+                  </div>
                 </div>
               </div>
               <div class="comment-content">
@@ -101,10 +103,10 @@ export default class TweetView {
               </div>
             </div>
             `;
-      }
-    }
-    // console.log(this.tweetCollection.user);
-    // console.log(this.newTweet.author);
-    // this.showHeaderActionBlock(this.tweetCollection.user, this.newTweet.author);
-  }
-}
+
+            const currentHeaderActionBlock = document.querySelector('.header_action-block');
+            this.showHeaderActionBlock(this.tweetCollection.user, this.newTweet.author, currentHeaderActionBlock);
+          };
+        };
+      };
+};

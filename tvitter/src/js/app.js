@@ -33,10 +33,11 @@ class TweetsController {
     this.tweetFeedView.display(tweets);
     this.filterView.display(tweets);
   }
-  getFeed(skip, top, filterConfig) {
-    this.tweets = tweetCollection.getPage((skip = 0), (top = 10), (filterConfig = {}));
-    this.tweetFeedView.display(tweets);
-    this.filterView.display(tweets);
+  getFeed(skip = 0, top = 10, filterConfig = {}) {
+    this.tweets = this.tweetCollection.getPage((skip), (top), (filterConfig));
+    this.tweetFeedView.display(this.tweets);
+    this.filterView.display(this.tweets);
+    this.filterView.filterControllerListener();
   }
   showTweet(id) {
     const newTweet = this.tweetCollection._get(id);
@@ -69,11 +70,11 @@ class TweetsController {
             this.setCurrentUser(newUser);
             modal.style.display = 'none';
             this.listenerAddNewTweet();
-            this.listenerTweetBlock();
+            this.listenerTweetBlock();                      
           }
         });
       } else {
-        console.log('not guest');
+        console.log('not guest');    
       }
     });
   }
@@ -103,7 +104,8 @@ class TweetsController {
   startTweetter() {
     console.log('tweetter запущен');
     // this.showTweet('2');
-    this.getStartedTweetsLIst(this.tweetCollection.getPage(0, 8));
+    this.getStartedTweetsLIst(this.tweetCollection.getPage(1, 7));
+    // this.getFeed(0, 10);
     this.listenerCurrentUser();
     this.listenerAddNewTweet();
     this.listenerTweetBlock();
@@ -112,9 +114,6 @@ class TweetsController {
 
 const tweetsController = new TweetsController();
 tweetsController.startTweetter();
-// tweetsController.addTweet('lorem lorem lorem #lorem lorem lorem lorem lorem lorem lorem lore');
-
-// tweetsController.setCurrentUser();
 
 // ++++++++++++++     tests    ++++++++++++
 // console.log(tweets);
