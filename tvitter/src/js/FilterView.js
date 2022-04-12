@@ -28,7 +28,7 @@ export default class FilterView {
           element = element.replace('<span>', '').replace('</span>', '');
           if (element.startsWith('#')) {
             hashTagsList.push(element.toLowerCase());
-          }
+          };
         });
       });
       hashTagsList = new Set(hashTagsList);
@@ -38,15 +38,18 @@ export default class FilterView {
         option.innerHTML = element;
         filter_hastag.append(option);
       });
-    }
-  }
+    };
+    this.filterControllerListener();
+  };
+
   filterControllerListener() {
     const filter = document.querySelector('#filter');
     filter.addEventListener('click', (e) => {
-      console.log(e.target);
+      // console.log(e.target);
       if (e.target.classList == 'svg-btn') {
         filter.classList.toggle('hidden');
-      }
+      };
     });
-  }
-}
+  };
+  
+};

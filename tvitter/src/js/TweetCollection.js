@@ -1,11 +1,14 @@
 import Tweet from './Tweet.js';
+import Comment from './Comment.js';
 import tweets from './tweets_arr.js';
+// import TweetFeedView from './TweetFeedView.js';
 export default class TweetCollection {
   _tweets;
-  _user = 'Guest';
-
-  constructor(user) {
-    this._tweets = tweets;
+  // _user;
+  // _user = '';
+  constructor() {
+    this._tweets = tweets; 
+    this._user = 'Guest';              
   }
 
   addAll(tws) {
@@ -58,14 +61,14 @@ export default class TweetCollection {
     }
   }
   _get(id) {
-    return tweets.find((tweet) => tweet.id === id);
+    return this._tweets.find((tweet) => tweet.id === id);
   }
 
   _edit(id, text) {
     const tweet = this._get(id);
     if (tweet) {
       if (tweet.author === this._user && Tweet.validate(tweet)) {
-        console.log(`пользователь ${this._user} успешно отредактировал tweet`);
+        console.log(`пользователь ${this._user} успешно отредактировал tweet id=${id}`);
         tweet.text = text;
         return true;
       } else {
@@ -81,9 +84,9 @@ export default class TweetCollection {
 
   _remove(id) {
     const tweet = this._get(id);
-    console.log(tweet);
+    // console.log(tweet);
     if (tweet && tweet.author === this._user) {
-      console.log(`пользователь ${this._user} успешно удалил tweet`);
+      console.log(`пользователь ${this._user} успешно удалил tweet id=${id}`);
       this._tweets.splice(tweet.id - 1, 1);
       return true;
     } else {
@@ -99,7 +102,7 @@ export default class TweetCollection {
   }
 
   _add(text) {
-    if (this._user == 'Guest') {
+    if (this._user === 'Guest') {
       console.log(`${this._user} не может добавлять твиты`);
       return false;
     } else {
@@ -110,8 +113,8 @@ export default class TweetCollection {
       newTweet.author = this._user;
       newTweet.comments = [];
       if (Tweet.validate(newTweet)) {
-        tweets.push(newTweet);
-        console.log('твит успешно добавлен');
+        this._tweets.push(newTweet);
+        console.log(`Пользователь ${this._user} успешно добавил твит`);
         return true;
       } else {
         return false;
@@ -126,11 +129,13 @@ export default class TweetCollection {
       newComment.id = this._genereteId();
       newComment.text = text;
       newComment.createdAt = new Date();
-      newComment.author = user;
+      newComment.author = this._user;
       if (Comment.validate(newComment)) {
         commentedTweet.comments.push(newComment);
+        console.log(`пользователь ${this._user} успешно добавил комментарий tweet id=${id}`);
         return true;
       } else {
+        console.log(`пользователь ${this._user} не может добавлять комментарии`);
         return false;
       }
     }

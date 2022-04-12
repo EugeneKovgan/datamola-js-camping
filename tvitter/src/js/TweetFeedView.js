@@ -4,7 +4,7 @@ export default class TweetFeedView {
   constructor(containerId) {
     this.containerId = containerId;
     this.tweetCollection = new TweetCollection();
-    this.tweetView = new TweetView();
+    this.tweetView = new TweetView();    
   }
   display(tweets) {
     this.tweets = tweets;
@@ -41,7 +41,10 @@ export default class TweetFeedView {
               <input type="checkbox" />
               <span class="slider round"></span>
             </label>
-            <input class="filter_date" type="date" />
+            <div class="filter_date_conatiner">
+              <input class="filter_date" type="date" />
+              <input class="filter_date" type="date" />
+            </div>
           </div>
 
           <div class="filter-item">
@@ -67,7 +70,7 @@ export default class TweetFeedView {
     </div>
     `;
         
-    const tweets_container = document.querySelector('.tweets-container');
+    const tweets_container = document.querySelector('.tweets-container');    
     this.tweets.forEach((element) => {
       element.text = this.tweetView.markedHashtags(element.text);
       tweets_container.innerHTML += `
@@ -84,13 +87,13 @@ export default class TweetFeedView {
           <div class="header_action-block"></div>
         </div>
         <div class="tweet-content">
-          <p class="text tweet-text">${element.text}</p>
+          <p class="text tweet-text">${element.text} --- id=${element.id}</p>
         </div>
         <div class="tweet-footer">
           <div class="date-block text"><span>${element.createdAt.toLocaleString()}</span></div>
           <div class="comment-counter">
             <span class="comment-counter_number">${element.comments.length}</span>
-            <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />
+            <img class="svg-btn-message" src="./assets/bx_message-rounded.svg" alt="message" />
           </div>
         </div>
       </div>

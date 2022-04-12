@@ -1,6 +1,7 @@
 import TweetCollection from './TweetCollection.js';
 export default class TweetView {
   constructor(containerId) {
+    this.tweetCollection = new TweetCollection();
     this.containerId = containerId;
   }
 
@@ -19,27 +20,25 @@ export default class TweetView {
   }
 
   showHeaderActionBlock(user, author, headerActionBlockId) {
-    console.log(headerActionBlockId)
+    // console.log(this.tweetCollection._user);    
     if (user !== author) {
       console.log(`${user} !=  ${author}`);
     } else {
       console.log(`${user} =  ${author}`);
       headerActionBlockId.innerHTML = `
-      <img class="svg-btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
-      <img class="svg-btn" src="./assets/bx_message-rounded-x.svg" alt="delelte" />
+      <img class="svg-btn edit_btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
+      <img class="svg-btn del_btn" src="./assets/bx_message-rounded-x.svg" alt="delelte" />
       `;
     }
   }
 
-  display(newTweet) {
+  display(newTweet) {    
     console.log(`отрисован 1 твит ${newTweet.author}`);
     const main_pager = document.querySelector(`#${this.containerId}`);
-    this.newTweet = newTweet;
-    console.log(this.newTweet);
-    this.tweetCollection = new TweetCollection();
+    this.newTweet = newTweet;    
     main_pager.innerHTML = `
         <button class="go-back_btn btn">Go back</button>
-          <div class="main_content">
+        <div class="main_content">
           <div class="tweets-container" id="tweets_container">
           </div>
         </div>     
@@ -62,23 +61,24 @@ export default class TweetView {
           </div>
         </div>
         <div class="tweet-content">
-          <p class="text tweet-text">${this.newTweet.text}</p>
+          <p class="text tweet-text">${this.newTweet.text} --- id="${this.newTweet.id}</p>
         </div>
         <div class="tweet-footer">
           <div class="date-block text"><span>${this.newTweet.createdAt.toLocaleString()}</span></div>
           <div class="comment-counter">
             <span class="comment-counter_number">${this.newTweet.comments.length}</span>
-            <img class="svg-btn" src="./assets/bx_message-rounded.svg" alt="message" />
+            <img class="svg-btn-message" src="./assets/bx_message-rounded.svg" alt="message" />
           </div>
         </div>
-      </div>     
-
-      `;
+      </div>       
+      `;   
+      const currentHeaderActionBlock = document.querySelector('.header_action-block');
+      this.showHeaderActionBlock(this.tweetCollection.user, this.newTweet.author, currentHeaderActionBlock);
       
     tweets_container.innerHTML += `
-          <div class="new-tweet">
-          <input class="new-tweet_textarea" type="text" placeholder="Text" />
-          <button class="new-tweet_btn btn">Add</button>
+          <div class="new-comment">
+          <input class="new-comment_textarea" type="text" placeholder="Text" />
+          <button class="new-comment_btn btn">Add</button>
           </div>`;
     if (newTweet.comments.length > 0) {
       for (let comment of newTweet.comments) {
@@ -103,9 +103,6 @@ export default class TweetView {
               </div>
             </div>
             `;
-
-            const currentHeaderActionBlock = document.querySelector('.header_action-block');
-            this.showHeaderActionBlock(this.tweetCollection.user, this.newTweet.author, currentHeaderActionBlock);
           };
         };
       };
