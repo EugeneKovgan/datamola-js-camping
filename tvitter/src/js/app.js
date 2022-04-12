@@ -40,13 +40,11 @@ class TweetsController {
     this.tweetCollection._edit(id, text);
   }
   removeTweet(id) {
-    this.tweetCollection._remove(id);  
-    this.tweetFeedView.display(this.tweetFeedView.tweets); 
+    this.tweetCollection._remove(id);
     console.log(this.currentTweetList);       
-    this.currentTweetList = this.currentTweetList-1;
+    // this.currentTweetList = this.currentTweetList-1;
     console.log(this.currentTweetList);
     this.getFeed(0, this.currentTweetList);
-    this.listenerFunctionBlock();
     this.getNextTweets(this.currentTweetList)
   }
   getFeed(skip = 0, top = 10, filterConfig = {}){
@@ -57,7 +55,10 @@ class TweetsController {
   showTweet(id) {
     const newTweet = this.tweetCollection._get(id);
     this.tweetView.display(newTweet);
-    this.listenerOneTweetBack(); 
+    this.listenerOneTweetBack();
+    // this.listenerLogo();
+    this.listenerOneTweetBlock();
+    // this.listenerTweetsBlock()
   }
 
 //////////           listeners        ////////////////////////////////////////////////////
@@ -120,27 +121,43 @@ class TweetsController {
     });
   };
 
-  listenerTweetBlock() {
+  listenerTweetsBlock() {
     const tweetBlock = document.querySelector('.tweets-container');
     tweetBlock.addEventListener('click', (e) => {
         let targetTweet = e.target.closest('.tweet-container');
         if (e.target.className == 'svg-btn del_btn') {
+          console.log(`remove id = ${targetTweet.id}`);         
+          this.removeTweet(targetTweet.id);
+          this.listenerTweetsBlock();
+        } 
+        else if (e.target.className === 'svg-btn edit_btn') {
+          console.log(`edit id = ${targetTweet.id}`);
+          this.editMessage(targetTweet);
+          // this.getFeed(0, this.currentTweetList);
+        }
+        else {
+          console.log('else');
+          console.log(targetTweet);          
+          this.showTweet(targetTweet.id);
+          this.listenerAddNewComment(targetTweet);                     
+        };
+    });
+  };
+
+  listenerOneTweetBlock() {
+        let targetTweet = document.querySelector('.tweet-container');
+        console.log(targetTweet)
+        targetTweet.addEventListener('click',(e)=> {
+        if (e.target.className == 'svg-btn del_btn') {
           console.log('remove');          
           this.removeTweet(targetTweet.id);
-          this.listenerTweetBlock();
+          this.listenerTweetsBlock();
         } 
         else if (e.target.className === 'svg-btn edit_btn') {
           console.log('edit');
-          this.editMessage(targetTweet);
-        }
-        else {
-          console.log('e;se');
-          this.showTweet(targetTweet.id);
-          this.listenerAddNewComment();
-          // this.showTweet(targetTweet.id)                        
-        };
-            
-    });
+          // this.editMessage(targetTweet);
+        }    
+    })    
   };
 
   listenerOneTweetBack(){
@@ -153,34 +170,68 @@ class TweetsController {
     });
   };
 
-  listenerLogo(){
-    const logo = document.querySelector('.header_logo');
-    logo.addEventListener('click',()=>{                    // btn logo
-      console.log('logo');
-      this.getFeed(0, this.currentTweetList);
-      this.getNextTweets();
-      this.listenerFunctionBlock();        
+  // listenerLogo(){
+  //   const logo = document.querySelector('.header_logo');
+  //   logo.addEventListener('click',()=>{                    // btn logo
+  //     console.log('logo');
+  //     this.getFeed(0, this.currentTweetList);
+  //     this.getNextTweets();
+  //     this.listenerFunctionBlock();        
+  //   });
+  // };
+
+  listenerFilter(){
+    const filter = document.querySelector('#filter');
+    filter.addEventListener('click', (e) => {
+      if (e.target.classList == 'svg-btn') {
+        filter.classList.toggle('hidden');
+      };
+      if(e.target.classList == 'filter_name') {
+        console.log('filter_name');
+      }
+      if(e.target.classList == 'filter_date_up') {
+        console.log('filter_date_up');
+      }
+      if(e.target.classList == 'filter_date_to') {
+        console.log('filter_date_to');
+      }
+      if(e.target.classList == 'filter_text') {
+        console.log('filter_text');
+      }
+      if(e.target.classList == 'filter_hastag') {
+        console.log('filter_hastag');
+      }
     });
-  };
+  }
+
+  listenerFunctionBlock(){
+    this.listenerCurrentUser();
+    this.listenerAddNewTweet();
+    this.listenerTweetsBlock();
+    this.listenerFilter() 
+  }
 
 //////////           functions        ////////////////////////////////////////////////////  
 
   editMessage(targetTweet){
     console.log(targetTweet)
-    const tweetText = targetTweet.querySelector('.tweet-text');
+    const tweetText = targetTweet.querySelector('.tweet-text');  
     const modalEdit = document.querySelector('#modal-edit-message');
     const messageInput = document.querySelector('.edit-message-input')
     const saveBtn = modalEdit.querySelector('.save_btn');
     const close = modalEdit.querySelector('.edit-message-close');
+
     modalEdit.style.display = 'block';
     close.addEventListener('click', () => (modalEdit.style.display = 'none'));    
-    console.log(tweetText.innerHTML);
-    messageInput.innerHTML = tweetText.innerHTML;
-    saveBtn.addEventListener('click',()=>{
-      console.log(messageInput.innerHTML)
+    messageInput.value = tweetText.innerHTML;
+    console.log(messageInput.value);        
+    saveBtn.addEventListener('click',()=> {
+      // console.log(messageInput.innerHTML)
       this.editTweet(targetTweet.id, messageInput.value);
+      console.log(`id = ${targetTweet.id}`);
+      console.log(`id = ${messageInput.value}`);
+      messageInput.value ='';
       modalEdit.style.display = 'none';
-      this.startTweetter();
     })
   }
 
@@ -192,21 +243,14 @@ class TweetsController {
       this.listenerFunctionBlock();
     })    
   }
-
-  listenerFunctionBlock(){
-    this.listenerCurrentUser();
-    this.listenerAddNewTweet();
-    this.listenerTweetBlock(); 
-  }
   
   startTweetter() {       
     console.log('tweetter запущен');
-    console.log(this.tweetCollection._tweets);
     console.log(this.tweetCollection.user);
     this.getFeed(0, this.currentTweetList);
     this.getNextTweets();
+    // this.removeTweet('1')    
     this.listenerFunctionBlock();
-    this.listenerLogo()
     console.log(this.tweetCollection.user);
   }
 };

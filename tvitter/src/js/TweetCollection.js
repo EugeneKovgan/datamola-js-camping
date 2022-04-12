@@ -6,8 +6,8 @@ export default class TweetCollection {
   _tweets;
   // _user;
   // _user = '';
-  constructor() {
-    this._tweets = tweets; 
+  constructor() {    
+    this._tweets = tweets;             
     this._user = 'Guest';              
   }
 

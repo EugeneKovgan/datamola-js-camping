@@ -39,17 +39,17 @@ export default class FilterView {
         filter_hastag.append(option);
       });
     };
-    this.filterControllerListener();
+    // this.filterControllerListener();
   };
 
-  filterControllerListener() {
-    const filter = document.querySelector('#filter');
-    filter.addEventListener('click', (e) => {
-      // console.log(e.target);
-      if (e.target.classList == 'svg-btn') {
-        filter.classList.toggle('hidden');
-      };
-    });
-  };
+  // filterControllerListener() {
+  //   const filter = document.querySelector('#filter');
+  //   filter.addEventListener('click', (e) => {
+  //     // console.log(e.target);
+  //     if (e.target.classList == 'svg-btn') {
+  //       filter.classList.toggle('hidden');
+  //     };
+  //   });
+  // };
   
 };

@@ -42,8 +42,8 @@ export default class TweetFeedView {
               <span class="slider round"></span>
             </label>
             <div class="filter_date_conatiner">
-              <input class="filter_date" type="date" />
-              <input class="filter_date" type="date" />
+              <input class="filter_date_up" type="date" />
+              <input class="filter_date_to" type="date" />
             </div>
           </div>
 

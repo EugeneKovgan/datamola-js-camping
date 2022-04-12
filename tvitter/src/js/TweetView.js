@@ -19,8 +19,7 @@ export default class TweetView {
     return text;
   }
 
-  showHeaderActionBlock(user, author, headerActionBlockId) {
-    // console.log(this.tweetCollection._user);    
+  showHeaderActionBlock(user, author, headerActionBlockId) {   
     if (user !== author) {
       console.log(`${user} !=  ${author}`);
     } else {
