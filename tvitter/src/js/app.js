@@ -1,4 +1,4 @@
-import tweets from './tweets_arr.js';
+// import tweets from './tweets_arr.js';
 import Tweet from './Tweet.js';
 import Comment from './Comment.js';
 import TweetCollection from './TweetCollection.js';
@@ -8,7 +8,7 @@ import TweetFeedView from './TweetFeedView.js';
 import FilterView from './FilterView.js';
 class TweetsController {
   constructor() {
-    this.tweetCollection = new TweetCollection(tweets); // для проверки следующих методов
+    this.tweetCollection = new TweetCollection(); // для проверки следующих методов
     this.currentUser = new HeaderView('avatar_block'); // текущию юзверь
     this.tweetView = new TweetView('main_page'); // нарисовать один твит
     this.filterView = new FilterView('filter'); // фильтр
@@ -28,7 +28,7 @@ class TweetsController {
   }
   setCurrentUser(newUser) {
     console.log(newUser); 
-    this.tweetCollection.user = newUser
+    this.tweetCollection.user = newUser;
     this.currentUser.display(this.tweetCollection.user);
     console.log(this.tweetCollection.user);
   }
@@ -42,7 +42,7 @@ class TweetsController {
   removeTweet(id) {
     this.tweetCollection._remove(id);
     console.log(this.currentTweetList);       
-    // this.currentTweetList = this.currentTweetList-1;
+    this.currentTweetList = this.currentTweetList-1;
     console.log(this.currentTweetList);
     this.getFeed(0, this.currentTweetList);
     this.getNextTweets(this.currentTweetList)
@@ -56,9 +56,7 @@ class TweetsController {
     const newTweet = this.tweetCollection._get(id);
     this.tweetView.display(newTweet);
     this.listenerOneTweetBack();
-    // this.listenerLogo();
     this.listenerOneTweetBlock();
-    // this.listenerTweetsBlock()
   }
 
 //////////           listeners        ////////////////////////////////////////////////////
@@ -106,7 +104,6 @@ class TweetsController {
   listenerAddNewComment() {
     const tweetBlock = document.querySelector('.tweets-container');
     const currentTweetId = tweetBlock.querySelector('.tweet-container')
-    // console.log(currentTweetId.id)
     const comment = document.querySelector('.new-comment');
     const newComment = comment.querySelector('.new-comment_textarea');
     const addCommentBtn = comment.querySelector('.new-comment_btn');
@@ -125,19 +122,18 @@ class TweetsController {
     const tweetBlock = document.querySelector('.tweets-container');
     tweetBlock.addEventListener('click', (e) => {
         let targetTweet = e.target.closest('.tweet-container');
-        if (e.target.className == 'svg-btn del_btn') {
+        if (e.target.className === 'svg-btn del_btn') {
           console.log(`remove id = ${targetTweet.id}`);         
           this.removeTweet(targetTweet.id);
-          this.listenerTweetsBlock();
+          // this.getFeed(0, this.currentTweetList);
+          // this.listenerTweetsBlock();
         } 
         else if (e.target.className === 'svg-btn edit_btn') {
-          console.log(`edit id = ${targetTweet.id}`);
+          console.log(`edit id = ${targetTweet.id}`);          
           this.editMessage(targetTweet);
-          // this.getFeed(0, this.currentTweetList);
         }
         else {
-          console.log('else');
-          console.log(targetTweet);          
+          console.log('else');       
           this.showTweet(targetTweet.id);
           this.listenerAddNewComment(targetTweet);                     
         };
@@ -180,42 +176,52 @@ class TweetsController {
   //   });
   // };
 
-  listenerFilter(){
+  listenerFilter(){ 
+    const filterConfog = {author:'', dateFrom:'', dateTo:'', hashtags:'', text:''};
     const filter = document.querySelector('#filter');
+    const sortBtn = filter.querySelector('.sort-btn');
+    const filterName = filter.querySelector('.filter_name');
+    const filterDateUp = filter.querySelector('.filter_date_up');
+    const filterDateTo = filter.querySelector('.filter_date_to');
+    const filterHastag = filter.querySelector('.filter_hastag');
+    const filterText = filter.querySelector('.filter_text');
     filter.addEventListener('click', (e) => {
       if (e.target.classList == 'svg-btn') {
         filter.classList.toggle('hidden');
       };
-      if(e.target.classList == 'filter_name') {
-        console.log('filter_name');
-      }
-      if(e.target.classList == 'filter_date_up') {
-        console.log('filter_date_up');
-      }
-      if(e.target.classList == 'filter_date_to') {
-        console.log('filter_date_to');
-      }
-      if(e.target.classList == 'filter_text') {
-        console.log('filter_text');
-      }
-      if(e.target.classList == 'filter_hastag') {
-        console.log('filter_hastag');
-      }
     });
+    filterName.addEventListener('click',()=>{      
+        filterConfog.author = filterName.value;
+    });
+    filterDateUp.addEventListener('click',()=>{      
+      filterConfog.dateFrom = filterDateUp.value;
+    });
+    filterDateTo.addEventListener('click',()=>{      
+      filterConfog.dateTo = filterDateTo.value;
+    });
+    filterHastag.addEventListener('click',()=>{
+      filterConfog.hashtags = filterHastag.value;
+    });
+    filterText.addEventListener('input',()=>{      
+      filterConfog.text = filterText.value;
+    });
+    sortBtn.addEventListener('click',()=>{
+      this.startTweetter(filterConfog);
+    })
   }
 
   listenerFunctionBlock(){
     this.listenerCurrentUser();
     this.listenerAddNewTweet();
     this.listenerTweetsBlock();
-    this.listenerFilter() 
+    this.listenerFilter(); 
   }
 
 //////////           functions        ////////////////////////////////////////////////////  
 
   editMessage(targetTweet){
     console.log(targetTweet)
-    const tweetText = targetTweet.querySelector('.tweet-text');  
+    const tweetText = targetTweet.querySelector('.tweet-text');   
     const modalEdit = document.querySelector('#modal-edit-message');
     const messageInput = document.querySelector('.edit-message-input')
     const saveBtn = modalEdit.querySelector('.save_btn');
@@ -225,11 +231,10 @@ class TweetsController {
     close.addEventListener('click', () => (modalEdit.style.display = 'none'));    
     messageInput.value = tweetText.innerHTML;
     console.log(messageInput.value);        
-    saveBtn.addEventListener('click',()=> {
-      // console.log(messageInput.innerHTML)
-      this.editTweet(targetTweet.id, messageInput.value);
+    saveBtn.addEventListener('click',(e)=> {
       console.log(`id = ${targetTweet.id}`);
       console.log(`id = ${messageInput.value}`);
+      this.editTweet(targetTweet.id, messageInput.value);
       messageInput.value ='';
       modalEdit.style.display = 'none';
     })
@@ -243,13 +248,23 @@ class TweetsController {
       this.listenerFunctionBlock();
     })    
   }
+
+  // getTweetsBuFilter(filterConfog){
+    // this.getFeed(0, this.currentTweetList, filterConfog);
+    // console.log(filterConfog);    
+    // console.log(this.tweetCollection.user);  
+    // this.getFeed(0, 10, { text: '#js' });
+    // this.getFeed(0, 10, {filterConfog});
+    // this.getNextTweets();
+    // this.listenerFunctionBlock();
+    // console.log(this.tweetCollection.user);
+  // }
   
-  startTweetter() {       
+  startTweetter(filterConfog ={}) {       
     console.log('tweetter запущен');
-    console.log(this.tweetCollection.user);
-    this.getFeed(0, this.currentTweetList);
+    console.log(this.tweetCollection.user); 
+    this.getFeed(0, 5, filterConfog);
     this.getNextTweets();
-    // this.removeTweet('1')    
     this.listenerFunctionBlock();
     console.log(this.tweetCollection.user);
   }

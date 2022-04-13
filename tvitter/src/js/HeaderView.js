@@ -3,6 +3,7 @@ export default class HeaderView {
       this.containerId = containerId;
     }
     display(name) {
+      console.log(name)
       this.name = name;
       const avatar_block = document.querySelector(`#${this.containerId}`);
       const userName = avatar_block.querySelector('.user_name');

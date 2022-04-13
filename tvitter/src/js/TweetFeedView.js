@@ -26,6 +26,8 @@ export default class TweetFeedView {
         <img class="svg-btn" src="./assets/carbon_chevron-sort-up.svg" alt="up" />
         <div class="filter-content">
 
+          <button class="sort-btn btn">sort</button>
+
           <div class="filter-item">
             <div class="filter-name">Name</div>
             <label class="switch">

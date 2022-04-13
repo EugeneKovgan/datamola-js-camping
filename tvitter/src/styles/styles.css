@@ -256,7 +256,7 @@ h1 {
 }
 .filter {
   min-width: 300px;
-  height: 250px;
+  height: 285px;
   margin-left: 1rem;
   background: rgba(239, 234, 225, 0.2);
   border: 1px solid #efeae1;
@@ -420,6 +420,14 @@ input:checked + .slider:before {
   border-radius: 3px;
   margin-left: 20px;
 }
+.sort-btn{
+  width: 100%;
+  height: 1.8rem;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+} 
+
 .load-more_btn,
 .go-back_btn,
 .registration_btn,

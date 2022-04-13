@@ -21,9 +21,9 @@ export default class TweetView {
 
   showHeaderActionBlock(user, author, headerActionBlockId) {   
     if (user !== author) {
-      console.log(`${user} !=  ${author}`);
+      // console.log(`${user} !=  ${author}`);
     } else {
-      console.log(`${user} =  ${author}`);
+      // console.log(`${user} =  ${author}`);
       headerActionBlockId.innerHTML = `
       <img class="svg-btn edit_btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
       <img class="svg-btn del_btn" src="./assets/bx_message-rounded-x.svg" alt="delelte" />

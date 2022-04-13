@@ -4,8 +4,7 @@ import tweets from './tweets_arr.js';
 // import TweetFeedView from './TweetFeedView.js';
 export default class TweetCollection {
   _tweets;
-  // _user;
-  // _user = '';
+  _user;
   constructor() {    
     this._tweets = tweets;             
     this._user = 'Guest';              
@@ -25,9 +24,11 @@ export default class TweetCollection {
   }
 
   getPage(skip = 0, top = 10, filterConfig = {}) {
+    console.log('get');  
     let result = [...this._tweets];
     if (filterConfig) {
-      if (filterConfig._author) {
+      if (filterConfig.author) {
+        console.log(filterConfig.author);
         result = result.filter((tweet) =>
           tweet.author.toLocaleLowerCase().includes(filterConfig.author.toLocaleLowerCase()),
         );
@@ -41,8 +42,10 @@ export default class TweetCollection {
         result = result.filter((tweet) => tweet.createdAt <= filterConfig.dateTo);
       }
       if (filterConfig.hashtags) {
+        console.log(filterConfig.hashtags);          
         result = result.filter((tweet) =>
-          filterConfig.hashtags.every((hashtag) => tweet.text.includes(`#${hashtag}`)),
+          // filterConfig.hashtags.every((hashtag) => tweet.text.includes(`#${hashtag}`)),
+          tweet.text.includes(filterConfig.hashtags),
         );
       }
       if (filterConfig.text) {
@@ -84,7 +87,7 @@ export default class TweetCollection {
 
   _remove(id) {
     const tweet = this._get(id);
-    // console.log(tweet);
+    console.log(tweet);
     if (tweet && tweet.author === this._user) {
       console.log(`пользователь ${this._user} успешно удалил tweet id=${id}`);
       this._tweets.splice(tweet.id - 1, 1);
