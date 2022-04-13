@@ -8,8 +8,8 @@ export default class HeaderView {
       const avatar_block = document.querySelector(`#${this.containerId}`);
       const userName = avatar_block.querySelector('.user_name');
       console.log(`текущий пользователь ${this.name}`);
-      if (this.name != 'Guest') {
+      // if (this.name != 'Guest') {
         userName.innerHTML = this.name;
-      }
+      // }
     }
   }

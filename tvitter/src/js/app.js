@@ -1,11 +1,11 @@
-// import tweets from './tweets_arr.js';
-import Tweet from './Tweet.js';
-import Comment from './Comment.js';
+// import Tweet from './Tweet.js';
+// import Comment from './Comment.js';
 import TweetCollection from './TweetCollection.js';
 import HeaderView from './HeaderView.js';
 import TweetView from './TweetView.js';
 import TweetFeedView from './TweetFeedView.js';
 import FilterView from './FilterView.js';
+
 class TweetsController {
   constructor() {
     this.tweetCollection = new TweetCollection(); // для проверки следующих методов
@@ -18,6 +18,7 @@ class TweetsController {
     this.StartTweetsValue = this.StepNewTwetts //начальное колическтво твитов в ленте
     this.currentTweetList = this.StepNewTwetts; // текущее число твитов в списке;
   }
+
   makeCounter() { 
     let count = 0;
     return function() {
@@ -27,10 +28,8 @@ class TweetsController {
     };
   }
   setCurrentUser(newUser) {
-    console.log(newUser); 
     this.tweetCollection.user = newUser;
-    this.currentUser.display(this.tweetCollection.user);
-    console.log(this.tweetCollection.user);
+    this.currentUser.display(newUser);
   }
   addTweet(text) { 
     this.tweetCollection._add(text);
@@ -55,7 +54,7 @@ class TweetsController {
   showTweet(id) {
     const newTweet = this.tweetCollection._get(id);
     this.tweetView.display(newTweet);
-    this.listenerOneTweetBack();
+    this.listenerOneTweetButtonBack();
     this.listenerOneTweetBlock();
   }
 
@@ -68,24 +67,25 @@ class TweetsController {
     const registrationBtn = modal.querySelector('.registration_btn');
     const close = modal.querySelector('.registration-form-close');
     const user = document.querySelector('.user_name ');
+    
     close.addEventListener('click', () => (modal.style.display = 'none'));
     user.addEventListener('click', (e) => {
       e.preventDefault();
       console.log(this.tweetCollection.user);
-      if (this.tweetCollection.user === 'Guest') {
+      // if (this.tweetCollection.user === 'Guest') {
         modal.style.display = 'block';
         registrationBtn.addEventListener('click', () => {
           if (registrationLoginInput.value != '') {
             let newUser = registrationLoginInput.value;
+            console.log(newUser)
             this.setCurrentUser(newUser);
-            modal.style.display = 'none';       
-            this.listenerCurrentUser();               
-          } 
-        });
-      } else {        
-        console.log(`текущий пользователь ${this.tweetCollection.user}`);    
-      }
-    });
+            modal.style.display = 'none';    
+          } this.getTweetsByFilter()
+        })
+      // } else {        
+      //   console.log(`текущий пользователь ${this.tweetCollection.user}`);    
+      // }
+    })
   }
 
   listenerAddNewTweet() {
@@ -125,8 +125,8 @@ class TweetsController {
         if (e.target.className === 'svg-btn del_btn') {
           console.log(`remove id = ${targetTweet.id}`);         
           this.removeTweet(targetTweet.id);
-          // this.getFeed(0, this.currentTweetList);
-          // this.listenerTweetsBlock();
+          this.getFeed(0, this.currentTweetList);
+          this.listenerTweetsBlock();
         } 
         else if (e.target.className === 'svg-btn edit_btn') {
           console.log(`edit id = ${targetTweet.id}`);          
@@ -151,12 +151,12 @@ class TweetsController {
         } 
         else if (e.target.className === 'svg-btn edit_btn') {
           console.log('edit');
-          // this.editMessage(targetTweet);
+          this.editMessage(targetTweet);
         }    
     })    
   };
 
-  listenerOneTweetBack(){
+  listenerOneTweetButtonBack(){
     const backBtn = document.querySelector('.go-back_btn');
     backBtn.addEventListener('click',()=>{                  // btn back
       console.log('back');
@@ -165,16 +165,6 @@ class TweetsController {
       this.listenerFunctionBlock();     
     });
   };
-
-  // listenerLogo(){
-  //   const logo = document.querySelector('.header_logo');
-  //   logo.addEventListener('click',()=>{                    // btn logo
-  //     console.log('logo');
-  //     this.getFeed(0, this.currentTweetList);
-  //     this.getNextTweets();
-  //     this.listenerFunctionBlock();        
-  //   });
-  // };
 
   listenerFilter(){ 
     const filterConfog = {author:'', dateFrom:'', dateTo:'', hashtags:'', text:''};
@@ -206,7 +196,7 @@ class TweetsController {
       filterConfog.text = filterText.value;
     });
     sortBtn.addEventListener('click',()=>{
-      this.startTweetter(filterConfog);
+      this.getTweetsByFilter(filterConfog);
     })
   }
 
@@ -248,25 +238,21 @@ class TweetsController {
       this.listenerFunctionBlock();
     })    
   }
-
-  // getTweetsBuFilter(filterConfog){
-    // this.getFeed(0, this.currentTweetList, filterConfog);
-    // console.log(filterConfog);    
-    // console.log(this.tweetCollection.user);  
-    // this.getFeed(0, 10, { text: '#js' });
-    // this.getFeed(0, 10, {filterConfog});
-    // this.getNextTweets();
-    // this.listenerFunctionBlock();
-    // console.log(this.tweetCollection.user);
-  // }
   
-  startTweetter(filterConfog ={}) {       
-    console.log('tweetter запущен');
-    console.log(this.tweetCollection.user); 
+  getTweetsByFilter(filterConfog ={}){
+    console.log('tweetter перерисован фильтром');
     this.getFeed(0, 5, filterConfog);
     this.getNextTweets();
     this.listenerFunctionBlock();
-    console.log(this.tweetCollection.user);
+  }
+
+  startTweetter(filterConfog ={}) {
+    this.tweetCollection.user = 'Guest' ; 
+    // this.setCurrentUser('Guest')    
+    console.log('tweetter запущен');
+    this.getFeed(0, 5, filterConfog);
+    this.getNextTweets();
+    this.listenerFunctionBlock();
   }
 };
 
@@ -292,5 +278,4 @@ tweetsController.startTweetter();
 // console.log(tweetCollection.getPage(0, 10, { text: '#js' })); // отсортировать твиты с #js
 
 // console.log(tweets);
-
 // tweetsController.startTwitter();
