@@ -103,7 +103,8 @@ export default class TweetFeedView {
     
       const currentTweet = document.getElementById(`${element.id}`); 
       const currentHeaderActionBlock = currentTweet.querySelector('.header_action-block');      
-      this.tweetView.showHeaderActionBlock(this.tweetCollection.user, element.author, currentHeaderActionBlock);
+      // this.tweetView.showHeaderActionBlock(this.tweetCollection.user, element.author, currentHeaderActionBlock);
+      this.tweetView.showHeaderActionBlock(element.author, currentHeaderActionBlock);
     });
   };  
 };

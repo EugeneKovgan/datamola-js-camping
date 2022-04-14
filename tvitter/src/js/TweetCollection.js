@@ -152,7 +152,7 @@ export default class TweetCollection {
   }
   set user(newUser) {
     // this._user = newUser;
-    this._user = newUser;
+    this._user = newUser;    
   }
 
   get tweets() {

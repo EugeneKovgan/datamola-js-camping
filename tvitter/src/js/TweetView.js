@@ -19,11 +19,13 @@ export default class TweetView {
     return text;
   }
 
-  showHeaderActionBlock(user, author, headerActionBlockId) {   
-    if (user !== author) {
-      // console.log(`${user} !=  ${author}`);
+  showHeaderActionBlock(author, headerActionBlockId) {
+    let user = (localStorage.getItem('currentUser'));
+    // user = JSON.parse(user);
+    if (user != author) {
+      console.log(`${user} !=  ${author}`);
     } else {
-      // console.log(`${user} =  ${author}`);
+      console.log(`${user} =  ${author}`);
       headerActionBlockId.innerHTML = `
       <img class="svg-btn edit_btn" src="./assets/bx_message-rounded-edit.svg" alt="edit" />
       <img class="svg-btn del_btn" src="./assets/bx_message-rounded-x.svg" alt="delelte" />
@@ -72,7 +74,8 @@ export default class TweetView {
       </div>       
       `;   
       const currentHeaderActionBlock = document.querySelector('.header_action-block');
-      this.showHeaderActionBlock(this.tweetCollection.user, this.newTweet.author, currentHeaderActionBlock);
+      // this.showHeaderActionBlock(currentUser, this.newTweet.author, currentHeaderActionBlock); 
+      this.showHeaderActionBlock(this.newTweet.author, currentHeaderActionBlock);
       
     tweets_container.innerHTML += `
           <div class="new-comment">
