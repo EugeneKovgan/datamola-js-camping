@@ -22,7 +22,7 @@ export default class TweetCollection {
   }
 
   getPage(skip = 0, top = 10, filterConfig = {}) {
-    console.log('get');  
+    // console.log('get');  
     let result = [...this._tweets];
     if (filterConfig) {
       if (filterConfig.author) {

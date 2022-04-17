@@ -26,23 +26,15 @@ export default class TweetFeedView {
         <img class="svg-btn" src="./assets/carbon_chevron-sort-up.svg" alt="up" />
         <div class="filter-content">
 
-          <button class="sort-btn btn">sort</button>
+          <button class="reset-btn btn">Reset</button>
 
           <div class="filter-item">
             <div class="filter-name">Name</div>
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
             <select class="filter_name" name="" id=""></select>
           </div>
 
           <div class="filter-item">
             <div class="filter-name">Date</div>
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
             <div class="filter_date_conatiner">
               <input class="filter_date_up" type="date" />
               <input class="filter_date_to" type="date" />
@@ -51,19 +43,11 @@ export default class TweetFeedView {
 
           <div class="filter-item">
             <div class="filter-name">Text</div>
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
             <input class="filter_text" type="text" />
           </div>
 
           <div class="filter-item">
             <div class="filter-name">#</div>
-            <label class="switch">
-              <input type="checkbox" />
-              <span class="slider round"></span>
-            </label>
             <select class="filter_hastag" name="" id=""></select>
           </div>
 
@@ -108,3 +92,34 @@ export default class TweetFeedView {
     });
   };  
 };
+
+
+// <div class="filter-item">
+//             <div class="filter-name">Name</div>
+//             <label class="switch">
+//               <input type="checkbox" />
+//               <span class="slider round"></span>
+//             </label>
+//             <select class="filter_name" name="" id=""></select>
+//           </div>
+
+//           <div class="filter-item">
+//             <div class="filter-name">Date</div>
+//             <label class="switch">
+//               <input type="checkbox" />
+//               <span class="slider round"></span>
+//             </label>
+//             <div class="filter_date_conatiner">
+//               <input class="filter_date_up" type="date" />
+//               <input class="filter_date_to" type="date" />
+//             </div>
+//           </div>
+
+//           <div class="filter-item">
+//             <div class="filter-name">Text</div>
+//             <label class="switch">
+//               <input type="checkbox" />
+//               <span class="slider round"></span>
+//             </label>
+//             <input class="filter_text" type="text" />
+//           </div>

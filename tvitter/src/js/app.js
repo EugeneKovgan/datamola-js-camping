@@ -51,7 +51,7 @@ class TweetsController {
     console.log(this.currentTweetList);       
     this.currentTweetList = this.currentTweetList-1;
     console.log(this.currentTweetList);
-    this.getFeed(0, this.currentTweetList);
+    // this.getFeed(0, this.currentTweetList);
     this.getNextTweets(this.currentTweetList)
   }
   getFeed(skip = 0, top = 10, filterConfig = {}){
@@ -113,6 +113,16 @@ class TweetsController {
             modal.style.display = 'none'; 
             this.getTweetsByFilter();
         })
+    })
+  }
+
+  listenerClearLocalStorage(){
+    const exitBtn = document.querySelector('.btn-sign-out');
+    exitBtn.addEventListener('click',()=>{
+      console.log('clear localStorage')
+      localStorage.clear();
+      AddToLocalStorage(tweets, regisratedUser); 
+      this.startTweetter()
     })
   }
 
@@ -199,7 +209,7 @@ class TweetsController {
   listenerFilter(){ 
     const filterConfig = {author:'', dateFrom:'', dateTo:'', hashtags:'', text:''};
     const filter = document.querySelector('#filter');
-    const sortBtn = filter.querySelector('.sort-btn');
+    const resetBtn = filter.querySelector('.reset-btn');
     const filterName = filter.querySelector('.filter_name');
     const filterDateUp = filter.querySelector('.filter_date_up');
     const filterDateTo = filter.querySelector('.filter_date_to');
@@ -210,28 +220,34 @@ class TweetsController {
         filter.classList.toggle('hidden');
       };
     });
-    filterName.addEventListener('click',()=>{      
-        filterConfig.author = filterName.value;
+    filterName.addEventListener('change',()=>{      
+      filterConfig.author = filterName.value;
+      this.getTweetsByFilter(filterConfig);
     });
-    filterDateUp.addEventListener('click',()=>{      
+    filterDateUp.addEventListener('change',()=>{      
       filterConfig.dateFrom = filterDateUp.value;
+      this.getTweetsByFilter(filterConfig);
     });
-    filterDateTo.addEventListener('click',()=>{      
+    filterDateTo.addEventListener('change',()=>{      
       filterConfig.dateTo = filterDateTo.value;
+      this.getTweetsByFilter(filterConfig);
     });
-    filterHastag.addEventListener('click',()=>{
+    filterHastag.addEventListener('change',()=>{
       filterConfig.hashtags = filterHastag.value;
+      this.getTweetsByFilter(filterConfig);
     });
     filterText.addEventListener('input',()=>{      
       filterConfig.text = filterText.value;
-    });
-    sortBtn.addEventListener('click',()=>{
       this.getTweetsByFilter(filterConfig);
+    });
+    resetBtn.addEventListener('click',()=>{
+      this.getTweetsByFilter();
     })
   }
 
   listenerFunctionBlock(){
     this.listenerRegiastrationAdnLogin();
+    // this.listenerClearLocalStorage()
     this.listenerAddNewTweet();
     this.listenerTweetsBlock();
     this.listenerFilter(); 
@@ -300,11 +316,12 @@ class TweetsController {
     this.listenerFunctionBlock();
   }
 
-  startTweetter(filterConfig ={}) {
+  startTweetter() {
     this.tweetCollection.user = 'Guest' ; 
     // this.setCurrentUser('Guest')    
     console.log('tweetter запущен');
-    this.getFeed(0, this.StartTweetsValue, filterConfig);
+    // this.getFeed(0, this.StartTweetsValue, filterConfig);
+    this.getFeed(0, this.StartTweetsValue);
     this.getNextTweets();
     this.listenerFunctionBlock();
   }
