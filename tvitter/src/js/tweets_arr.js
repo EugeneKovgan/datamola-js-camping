@@ -10,7 +10,7 @@ const tweets = [
     id: '2',
     text: 'Какие дела?',
     createdAt: new Date('2022-03-07T23:00:01'),
-    author: 'Guest',
+    author: 'Илон Маск',
     comments: [
       {
         id: '201',
@@ -45,7 +45,7 @@ const tweets = [
     id: '6',
     text: 'Какие дела? #datamola',
     createdAt: new Date('2022-03-09T23:00:01'),
-    author: 'Guest',
+    author: 'Иванов Иван',
     comments: [
       {
         id: '601',
@@ -86,7 +86,7 @@ const tweets = [
     id: '10',
     text: 'Какие дела?',
     createdAt: new Date('2022-03-09T23:00:01'),
-    author: 'Guest',
+    author: 'Илон Маск',
     comments: [
       {
         id: '1001',
@@ -192,22 +192,22 @@ const tweets = [
 this.regisratedUser = [
   {
     name: 'eugene',
-    pass: '123'
+    pass: '123',
   },
   {
     name: 'Илон Маск',
-    pass: '123'
+    pass: '123',
   },
   {
     name: 'Snow',
-    pass: '123'
-  }
-]
+    pass: '123',
+  },
+];
 
 function AddToLocalStorage(tweets, users) {
   if (localStorage.length === 0) {
     tweets_localStor = JSON.stringify(tweets);
-    users_localStor = JSON.stringify(users);    
+    users_localStor = JSON.stringify(users);
     localStorage.setItem('tweets', tweets_localStor);
     localStorage.setItem('currentUser', 'Guest');
     localStorage.setItem('users', users_localStor);
@@ -215,5 +215,3 @@ function AddToLocalStorage(tweets, users) {
 }
 
 AddToLocalStorage(tweets, regisratedUser);
-
-// export default tweets;

@@ -20,7 +20,7 @@ export default class TweetView {
   }
 
   showHeaderActionBlock(author, headerActionBlockId) {
-    let user = (localStorage.getItem('currentUser'));
+    let user = localStorage.getItem('currentUser');
     // user = JSON.parse(user);
     if (user != author) {
       console.log(`${user} !=  ${author}`);
@@ -33,10 +33,10 @@ export default class TweetView {
     }
   }
 
-  display(newTweet) {    
+  display(newTweet) {
     console.log(`отрисован 1 твит ${newTweet.author}`);
     const main_pager = document.querySelector(`#${this.containerId}`);
-    this.newTweet = newTweet;    
+    this.newTweet = newTweet;
     main_pager.innerHTML = `
         <button class="go-back_btn btn">Go back</button>
         <div class="main_content">
@@ -72,11 +72,10 @@ export default class TweetView {
           </div>
         </div>
       </div>       
-      `;   
-      const currentHeaderActionBlock = document.querySelector('.header_action-block');
-      // this.showHeaderActionBlock(currentUser, this.newTweet.author, currentHeaderActionBlock); 
-      this.showHeaderActionBlock(this.newTweet.author, currentHeaderActionBlock);
-      
+      `;
+    const currentHeaderActionBlock = document.querySelector('.header_action-block');
+    this.showHeaderActionBlock(this.newTweet.author, currentHeaderActionBlock);
+
     tweets_container.innerHTML += `
           <div class="new-comment">
           <input class="new-comment_textarea" type="text" placeholder="Text" />
@@ -105,7 +104,7 @@ export default class TweetView {
               </div>
             </div>
             `;
-          };
-        };
-      };
-};
+      }
+    }
+  }
+}

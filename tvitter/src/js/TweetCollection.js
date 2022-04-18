@@ -1,12 +1,11 @@
 import Tweet from './Tweet.js';
 import Comment from './Comment.js';
 export default class TweetCollection {
-  constructor() {    
-    // this._tweets = tweets;             
-    this._tweets = [];             
-    this._user = 'Guest';              
-    this.restore();              
-  } 
+  constructor() {
+    this._tweets = [];
+    this._user = 'Guest';
+    this.restore();
+  }
 
   addAll(tws) {
     const noValid = [];
@@ -22,7 +21,6 @@ export default class TweetCollection {
   }
 
   getPage(skip = 0, top = 10, filterConfig = {}) {
-    // console.log('get');  
     let result = [...this._tweets];
     if (filterConfig) {
       if (filterConfig.author) {
@@ -40,11 +38,8 @@ export default class TweetCollection {
         result = result.filter((tweet) => tweet.createdAt <= filterConfig.dateTo);
       }
       if (filterConfig.hashtags) {
-        console.log(filterConfig.hashtags);          
-        result = result.filter((tweet) =>
-          // filterConfig.hashtags.every((hashtag) => tweet.text.includes(`#${hashtag}`)),
-          tweet.text.includes(filterConfig.hashtags),
-        );
+        console.log(filterConfig.hashtags);
+        result = result.filter((tweet) => tweet.text.includes(filterConfig.hashtags));
       }
       if (filterConfig.text) {
         result = result.filter((tweet) => tweet.text.includes(filterConfig.text));
@@ -128,7 +123,10 @@ export default class TweetCollection {
 
   _addComment(id, text) {
     const commentedTweet = this._get(id);
-    if (commentedTweet) {
+    if (this._user === 'Guest') {
+      console.log(`${this._user} не может добавлять комментарии`);
+      return false;
+    } else if (commentedTweet) {
       const newComment = {};
       newComment.id = this._genereteId();
       newComment.text = text;
@@ -147,12 +145,10 @@ export default class TweetCollection {
   }
 
   get user() {
-    // return this._user;
     return localStorage.getItem(this._user);
   }
   set user(newUser) {
-    // this._user = newUser;
-    this._user = newUser;    
+    this._user = newUser;
   }
 
   get tweets() {
@@ -164,13 +160,12 @@ export default class TweetCollection {
 
   restore() {
     const parseTweets = JSON.parse(localStorage.getItem('tweets'));
-    // console.log(parseTweets)
     this._tweets = parseTweets.map((twet) => {
       twet.createdAt = new Date(twet.createdAt);
       return twet;
-    })
+    });
   }
-  save(){
-    localStorage.setItem('tweets',JSON.stringify(this.tweets));
+  save() {
+    localStorage.setItem('tweets', JSON.stringify(this.tweets));
   }
 }

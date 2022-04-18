@@ -4,7 +4,7 @@ export default class TweetFeedView {
   constructor(containerId) {
     this.containerId = containerId;
     this.tweetCollection = new TweetCollection();
-    this.tweetView = new TweetView();    
+    this.tweetView = new TweetView();
   }
   display(tweets) {
     this.tweets = tweets;
@@ -55,8 +55,8 @@ export default class TweetFeedView {
       </div>
     </div>
     `;
-        
-    const tweets_container = document.querySelector('.tweets-container');    
+
+    const tweets_container = document.querySelector('.tweets-container');
     this.tweets.forEach((element) => {
       element.text = this.tweetView.markedHashtags(element.text);
       tweets_container.innerHTML += `
@@ -84,15 +84,13 @@ export default class TweetFeedView {
         </div>
       </div>
       `;
-    
-      const currentTweet = document.getElementById(`${element.id}`); 
-      const currentHeaderActionBlock = currentTweet.querySelector('.header_action-block');      
-      // this.tweetView.showHeaderActionBlock(this.tweetCollection.user, element.author, currentHeaderActionBlock);
+
+      const currentTweet = document.getElementById(`${element.id}`);
+      const currentHeaderActionBlock = currentTweet.querySelector('.header_action-block');
       this.tweetView.showHeaderActionBlock(element.author, currentHeaderActionBlock);
     });
-  };  
-};
-
+  }
+}
 
 // <div class="filter-item">
 //             <div class="filter-name">Name</div>
