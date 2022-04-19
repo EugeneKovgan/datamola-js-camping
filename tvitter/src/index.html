@@ -12,7 +12,7 @@
     <div class="body">
       <header class="header container">
         <div class="header_logo">
-          <a href=""><img src="./assets/logo.svg" alt="logo" /></a>
+          <a href="./index.html"><img src="./assets/logo.svg" alt="logo" /></a>
         </div>
         <div class="header_user_info-block">
           <a class="avatar-block" id="avatar_block" href="">
@@ -23,74 +23,65 @@
           </a>
 
           <div class="user_action">
-            <a href="">
-              <img class="svg-btn" src="./assets/bx_chevron-down.svg" alt="down" />
-            </a>
+            <!-- <a href=""> -->
+              <!-- <img class="svg-btn" src="./assets/bx_chevron-down.svg" alt="down" /> -->
+              <img class="svg-btn btn-sign-out" src="./assets/codicon_sign-out.svg" alt="sign-out" />
+            <!-- </a> -->
           </div>
         </div>
       </header>
 
-      <main class="main container" id="main_page">
-        
-        <!-- <div class="main_content">
-          <div class="new-tweet">
-            <input class="new-tweet_textarea" type="text" placeholder="Text" />
-            <button class="new-tweet_btn btn">Add</button>
-          </div>
+      <main class="main container" id="main_page"></main>
 
-          <div class="tweets-container" id="tweets_container">         
-          </div>
-
-          <button class="load-more_btn btn">Load more</button>
-        </div> -->
-
-        <!-- <div class="filter" id="filter">
-          <div class="filter_header">
-            <div class="filter_header-name">Filter</div>
-            <img class="svg-btn" src="./assets/carbon_chevron-sort-up.svg" alt="up" />
-            <div class="filter-content">
-              <div class="filter-item">
-                <div class="filter-name">Name</div>
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider round"></span>
-                </label>
-                <select class="filter_name" name="" id="">
-                </select>
+      <div class="modal" id="modal">
+        <form action="" class="registration-form-block">
+          <div class="registration-form-block-container">
+            <div class="registration-form-block_header">
+              <p class="registration-form-name">Registration / Login</p>
+              <img
+                class="svg-btn registration-form-close"
+                src="./assets/ant-design_close-square-outlined.svg"
+                alt="svg-btn"
+              />
+            </div>
+            <div class="registration-form-block_main">
+              <div class="registration-login-block">
+                <p class="registration-login-name">Login</p>
+                <input class="registration-login-input" type="text" />
               </div>
-
-              <div class="filter-item">
-                <div class="filter-name">Date</div>
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider round"></span>
-                </label>
-                <input class="filter_date" type="date" />
-              </div>
-
-              <div class="filter-item">
-                <div class="filter-name">Text</div>
-                <label class="switch">
-                  <input type="checkbox" />
-
-                  <span class="slider round"></span>
-                </label>
-                <input class="filter_text" type="text" />
-              </div>
-
-              <div class="filter-item">
-                <div class="filter-name">#</div>
-                <label class="switch">
-                  <input type="checkbox" />
-                  <span class="slider round"></span>
-                </label>
-                <select class="filter_hastag" name="" id="">
-                </select>
+              <div class="registration-password-block">
+                <p class="registration-password-name">Password</p>
+                <input class="registration-password-input" type="text" />
               </div>
             </div>
+            <div class="registration-form-block_footer">
+              <button type="submit" class="registration_btn btn">Registration</button>
+              <button type="submit" class="login_btn btn">Login</button>
+            </div>
           </div>
-        </div> -->
-      </main>
+        </form>
+      </div>
+
+      <div class="modal-edit-message" id="modal-edit-message">
+        <div action="" class="edit-message-block">
+          <div class="edit-message-block-container">
+            <div class="edit-message-block_header">
+              <p class="edit-message-form-name">Edit message</p>
+              <img
+                class="svg-btn edit-message-close"
+                src="./assets/ant-design_close-square-outlined.svg"
+                alt="svg-btn"
+              />
+            </div>
+            <div class="edit-message-block_main">                           
+                <textarea class="edit-message-input" name="" id=""></textarea>             
+            </div>
+            <div class="edit-message-block_footer">
+              <button class="save_btn btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <footer class="footer container">
         <div class="footer-info text">
@@ -98,12 +89,13 @@
           © 2022 Designed by Eugene Kovgan
         </div>
         <div class="footer-github">
-          <a href="">
+          <a href="https://github.com/eugenekovgan">
             <img class="svg-btn" src="./assets/eva_github-outline.svg" alt="github" />
           </a>
         </div>
       </footer>
     </div>
+    <script src="./js/tweets_arr.js"></script>
     <script type="module" src="./js/app.js"></script>
   </body>
 </html>
