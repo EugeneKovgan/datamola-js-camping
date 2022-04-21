@@ -43,6 +43,7 @@ export default class TweetFeedView {
 
           <div class="filter-item">
             <div class="filter-name">Text</div>
+            <button class="text-btn btn">apply</button>
             <input class="filter_text" type="text" />
           </div>
 
