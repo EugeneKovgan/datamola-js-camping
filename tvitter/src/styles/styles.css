@@ -461,7 +461,6 @@ input:checked + .slider:before {
   border-radius: 15px;
   margin-right: 0.5rem;
 }
-
 .load-more_btn,
 .go-back_btn,
 .registration_btn,
