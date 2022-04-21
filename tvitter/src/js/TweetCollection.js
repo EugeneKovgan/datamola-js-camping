@@ -31,25 +31,30 @@ export default class TweetCollection {
       }
       if (filterConfig.dateFrom) {
         result = result.filter((tweet) => {
-          tweet.createdAt >= filterConfig.dateFrom;
+          return new Date(tweet.createdAt) >= new Date(filterConfig.dateFrom);
         });
       }
       if (filterConfig.dateTo) {
-        result = result.filter((tweet) => tweet.createdAt <= filterConfig.dateTo);
+        console.log(filterConfig.dateTo);
+        result = result.filter((tweet) => {
+          return new Date(tweet.createdAt) <= new Date(filterConfig.dateTo);
+        });
       }
       if (filterConfig.hashtags) {
         console.log(filterConfig.hashtags);
         result = result.filter((tweet) => tweet.text.includes(filterConfig.hashtags));
       }
       if (filterConfig.text) {
-        result = result.filter((tweet) => tweet.text.includes(filterConfig.text));
+        result = result.filter((tweet) =>
+          tweet.text.toLocaleLowerCase().includes(filterConfig.text.toLocaleLowerCase()),
+        );
       }
       result.sort((a, b) => {
         if (a.createdAt > b.createdAt) {
-          return 1;
+          return -1;
         }
         if (a.createdAt < b.createdAt) {
-          return -1;
+          return 1;
         }
         return 0;
       });

@@ -34,6 +34,7 @@ export default class TweetView {
   }
 
   display(newTweet) {
+    console.log(newTweet);
     console.log(`отрисован 1 твит ${newTweet.author}`);
     const main_pager = document.querySelector(`#${this.containerId}`);
     this.newTweet = newTweet;

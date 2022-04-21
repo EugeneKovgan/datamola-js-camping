@@ -14,6 +14,7 @@ class TweetsController {
     this.StepNewTwetts = 5; // количество подгружаемых твитов;
     this.StartTweetsValue = this.StepNewTwetts; //начальное колическтво твитов в ленте
     this.currentTweetList = this.StepNewTwetts; // текущее число твитов в списке;
+    this.api = new TweetFeedApiService('https://jslabapi.datamola.com');
   }
 
   makeCounter() {
@@ -49,6 +50,7 @@ class TweetsController {
   }
   showTweet(id) {
     const newTweet = this.tweetCollection._get(id);
+    console.log(id);
     this.tweetView.display(newTweet);
     this.listenerOneTweetButtonBack();
     this.listenerOneTweetBlock();
@@ -215,6 +217,7 @@ class TweetsController {
     const filterConfig = { author: '', dateFrom: '', dateTo: '', hashtags: '', text: '' };
     const filter = document.querySelector('#filter');
     const resetBtn = filter.querySelector('.reset-btn');
+    const textBtn = filter.querySelector('.text-btn');
     const filterName = filter.querySelector('.filter_name');
     const filterDateUp = filter.querySelector('.filter_date_up');
     const filterDateTo = filter.querySelector('.filter_date_to');
@@ -229,25 +232,29 @@ class TweetsController {
       filterConfig.author = filterName.value;
       this.getTweetsByFilter(filterConfig);
     });
+
     filterDateUp.addEventListener('change', () => {
-      filterConfig.dateFrom = filterDateUp.value;
-      this.getTweetsByFilter(filterConfig);
+      if (filterDateUp.value != '' && filterDateTo.value != '') {
+        filterConfig.dateFrom = filterDateUp.value;
+        filterConfig.dateTo = filterDateTo.value;
+        this.getTweetsByFilter(filterConfig);
+      }
     });
     filterDateTo.addEventListener('change', () => {
-      filterConfig.dateTo = filterDateTo.value;
-      this.getTweetsByFilter(filterConfig);
+      if (filterDateUp.value != '' && filterDateTo.value != '') {
+        filterConfig.dateFrom = filterDateUp.value;
+        filterConfig.dateTo = filterDateTo.value;
+        this.getTweetsByFilter(filterConfig);
+      }
     });
+
     filterHastag.addEventListener('change', () => {
       filterConfig.hashtags = filterHastag.value;
       this.getTweetsByFilter(filterConfig);
     });
-    filterText.addEventListener('input', (e) => {
-      // фильти по тексту не работает.
-      // e.stopPropagation();
-      // e.preventDefault();
+    textBtn.addEventListener('click', () => {
       filterConfig.text = filterText.value;
       console.log(filterText.value);
-
       this.getTweetsByFilter(filterConfig);
     });
     resetBtn.addEventListener('click', () => {
@@ -303,6 +310,7 @@ class TweetsController {
   getNextTweets() {
     const load_more_btn = document.querySelector('.load-more_btn');
     load_more_btn.addEventListener('click', () => {
+      this.getNextTweets();
       this.getFeed(0, this.counter());
       this.getNextTweets();
       this.listenerFunctionBlock();
@@ -331,6 +339,8 @@ class TweetsController {
 
   getTweetsByFilter(filterConfig = {}) {
     console.log('tweetter перерисован фильтром');
+    console.log(filterConfig);
+
     this.getFeed(0, this.currentTweetList, filterConfig);
     this.getNextTweets();
     this.listenerFunctionBlock();
@@ -342,6 +352,35 @@ class TweetsController {
     this.getFeed(0, this.StartTweetsValue);
     this.getNextTweets();
     this.listenerFunctionBlock();
+  }
+
+  //   startTweetter() {
+  //     console.log('tweetter запущен');
+  //     if (localStorage.getItem('currentUser') === null) {
+  //       localStorage.setItem('currentUser', 'Guest');
+  //     }
+  //     this.setCurrentUser(localStorage.getItem('currentUser'));
+  //     this.api.getTweetsAPI();
+  //     // this.getNextTweets();
+  //     // this.listenerFunctionBlock();
+  //   }
+}
+
+class TweetFeedApiService {
+  constructor(url) {
+    this.url = url;
+  }
+  async getTweetsAPI() {
+    try {
+      const response = await fetch(`${this.url}/tweet`);
+      const res = await response.json();
+      // console.log(res);
+      tweetsController.tweetFeedView.display(res);
+      tweetsController.getNextTweets();
+      tweetsController.listenerFunctionBlock();
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 
